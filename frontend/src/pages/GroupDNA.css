@@ -1,0 +1,229 @@
+.dna-top-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.dna-chart-wrap {
+  display: flex;
+  justify-content: center;
+  padding: 10px 0;
+  max-height: 280px;
+}
+
+.dna-chart-wrap--bar {
+  height: 220px;
+  max-height: 220px;
+}
+
+/* Category cards */
+.dna-cat-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+}
+
+.dna-cat-card {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  transition: border-color 0.15s;
+}
+
+.dna-cat-card:hover {
+  border-color: var(--primary-light);
+}
+
+.dna-cat-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  align-self: stretch;
+}
+
+.dna-cat-icon {
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+}
+
+.dna-cat-name {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.dna-cat-ring {
+  display: flex;
+  justify-content: center;
+}
+
+.dna-cat-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-self: stretch;
+}
+
+.dna-cat-stat {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+}
+
+.dna-cat-stat-label {
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.dna-cat-stat-val {
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+/* Branch profiles */
+.dna-branch-profiles {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 14px;
+}
+
+.dna-branch-card {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  transition: border-color 0.15s;
+}
+
+.dna-branch-card:hover {
+  border-color: var(--primary-light);
+}
+
+.dna-branch-rank {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-muted);
+}
+
+.dna-branch-name {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1.3;
+}
+
+.dna-branch-profit {
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--primary);
+}
+
+.dna-branch-bar-wrap {
+  background: var(--border);
+  border-radius: 3px;
+  height: 5px;
+  overflow: hidden;
+}
+
+.dna-branch-bar {
+  height: 100%;
+  background: linear-gradient(90deg, var(--primary) 0%, var(--primary-light) 100%);
+  border-radius: 3px;
+  transition: width 0.5s ease;
+}
+
+.dna-branch-mix {
+  display: flex;
+  justify-content: space-between;
+  font-size: 10px;
+  font-weight: 600;
+}
+
+.dna-branch-mix-bev  { color: var(--primary); }
+.dna-branch-mix-food { color: var(--gold); }
+
+/* Table */
+.dna-table-wrap {
+  overflow-x: auto;
+}
+
+.dna-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: 13px;
+}
+
+.dna-table th {
+  text-align: left;
+  padding: 8px 12px;
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-bottom: 1px solid var(--border);
+  white-space: nowrap;
+}
+
+.dna-table td {
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--border);
+  vertical-align: middle;
+}
+
+.dna-table tr:last-child td {
+  border-bottom: none;
+}
+
+.dna-table tr:hover td {
+  background: var(--bg-secondary);
+}
+
+.dna-td-rank   { color: var(--text-muted); font-weight: 700; width: 30px; }
+.dna-td-name   { font-weight: 600; color: var(--text-primary); }
+.dna-td-muted  { color: var(--text-muted); }
+.dna-td-profit { font-weight: 700; color: var(--primary); white-space: nowrap; }
+
+.dna-share-bar-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.dna-share-bar {
+  height: 6px;
+  background: linear-gradient(90deg, var(--primary) 0%, var(--primary-light) 100%);
+  border-radius: 3px;
+  max-width: 120px;
+}
+
+.dna-share-label {
+  font-size: 11px;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+@media (max-width: 1100px) {
+  .dna-branch-profiles { grid-template-columns: repeat(3, 1fr); }
+}
+
+@media (max-width: 900px) {
+  .dna-top-row         { grid-template-columns: 1fr; }
+  .dna-branch-profiles { grid-template-columns: repeat(2, 1fr); }
+}
