@@ -14,16 +14,17 @@ function aggregateItems(items) {
       category: r.category,
       division: r.division,
       branch: r.branch,
-      qty: 0, total_price: 0, total_cost: 0, total_profit: 0,
+      qty: 0, total_price: 0, total_cost: 0, total_profit: 0, true_revenue: 0,
     };
     map[k].qty          += (r.qty          || 0);
     map[k].total_price  += (r.total_price  || 0);
     map[k].total_cost   += (r.total_cost   || 0);
     map[k].total_profit += (r.total_profit || 0);
+    map[k].true_revenue += ((r.total_cost || 0) + (r.total_profit || 0));
   });
   return Object.values(map).map(p => ({
     ...p,
-    total_profit_pct: p.total_price > 0 ? (p.total_profit / p.total_price * 100) : 0,
+    total_profit_pct: p.true_revenue > 0 ? (p.total_profit / p.true_revenue * 100) : 0,
   }));
 }
 
@@ -138,7 +139,7 @@ router.get('/recommendations', (req, res) => {
       title: `Reprice ${p.product_desc}`,
       category: p.category,
       description: `High volume but low margin (${p.total_profit_pct.toFixed(1)}%). Small price increase recovers significant profit given ${Math.round(p.qty).toLocaleString()} units sold.`,
-      estimated_impact: Math.round(p.total_price * 0.03),
+      estimated_impact: Math.round(p.true_revenue * 0.03),
       items: [p.product_desc],
     }));
 

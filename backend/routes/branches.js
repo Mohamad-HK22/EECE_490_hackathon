@@ -8,17 +8,28 @@ router.get('/', (req, res) => {
   const ms   = getDataset('monthly_sales_long.csv');
 
   const branchMap = {};
+  const catMix = {};
+
   cats.filter(r => r.row_type === 'branch_total').forEach(r => {
+    const trueRevenue = (r.total_cost || 0) + (r.total_profit || 0);
     branchMap[r.branch] = {
       branch: r.branch,
       total_profit: (branchMap[r.branch]?.total_profit || 0) + (r.total_profit || 0),
-      total_revenue: (branchMap[r.branch]?.total_revenue || 0) + (r.total_price || 0),
+      total_revenue: (branchMap[r.branch]?.total_revenue || 0) + trueRevenue,
       total_qty: (branchMap[r.branch]?.total_qty || 0) + (r.qty || 0),
     };
   });
 
+  cats.filter(r => r.row_type === 'category').forEach(r => {
+    if (!catMix[r.branch]) catMix[r.branch] = { beverages: 0, food: 0, other: 0 };
+    const p = r.total_profit || 0;
+    if (r.category === 'BEVERAGES') catMix[r.branch].beverages += p;
+    else if (r.category === 'FOOD') catMix[r.branch].food += p;
+    else catMix[r.branch].other += p;
+  });
+
   // Add 2025 sales from monthly
-  const ms2025 = ms.filter(r => r.year === 2025 && r.period !== 'total_by_year');
+  const ms2025 = ms.filter(r => r.year === 2025 && r.period_type === 'month');
   const salesByBranch = {};
   ms2025.forEach(r => {
     salesByBranch[r.branch] = (salesByBranch[r.branch] || 0) + (r.sales_amount || 0);
@@ -27,8 +38,20 @@ router.get('/', (req, res) => {
   const branches = Object.values(branchMap).map(b => ({
     ...b,
     sales_2025: salesByBranch[b.branch] || 0,
+    bev_profit_pct: (() => {
+      const mix = catMix[b.branch];
+      if (!mix) return 0;
+      const total = mix.beverages + mix.food + mix.other;
+      return total > 0 ? (mix.beverages / total) * 100 : 0;
+    })(),
+    food_profit_pct: (() => {
+      const mix = catMix[b.branch];
+      if (!mix) return 0;
+      const total = mix.beverages + mix.food + mix.other;
+      return total > 0 ? (mix.food / total) * 100 : 0;
+    })(),
     profit_margin_pct: b.total_revenue > 0
-      ? (b.total_profit / (b.total_profit + b.total_revenue) * 100)
+      ? (b.total_profit / b.total_revenue * 100)
       : 0,
   })).sort((a, b) => b.total_profit - a.total_profit);
 

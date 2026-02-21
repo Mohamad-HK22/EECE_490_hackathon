@@ -8,26 +8,31 @@ router.get('/top', (req, res) => {
 
   let items = getDataset('profit_by_item.csv').filter(r => r.row_type === 'item');
   if (category) items = items.filter(r => r.category === category);
-  if (branch)   items = items.filter(r => r.branch === branch);
+  if (branch && branch !== 'all') items = items.filter(r => r.branch === branch);
 
   // Aggregate by product
   const map = {};
   items.forEach(r => {
     const k = r.product_desc;
     if (!k) return;
-    if (!map[k]) map[k] = { product_desc: k, category: r.category, division: r.division, qty: 0, total_price: 0, total_cost: 0, total_profit: 0, branch_count: new Set() };
+    if (!map[k]) map[k] = { product_desc: k, category: r.category, division: r.division, qty: 0, total_price: 0, total_cost: 0, total_profit: 0, true_revenue: 0, branch_count: new Set() };
     map[k].qty           += (r.qty || 0);
     map[k].total_price   += (r.total_price || 0);
     map[k].total_cost    += (r.total_cost || 0);
     map[k].total_profit  += (r.total_profit || 0);
+    map[k].true_revenue  += ((r.total_cost || 0) + (r.total_profit || 0));
     map[k].branch_count.add(r.branch);
   });
 
   let products = Object.values(map).map(p => ({
     ...p,
     branch_count: p.branch_count.size,
-    profit_margin_pct: p.total_price > 0
-      ? (p.total_profit / p.total_price * 100)
+    profit_margin_pct: p.true_revenue > 0
+      ? (p.total_profit / p.true_revenue * 100)
+      : (p.total_profit < 0 ? -100 : 0),
+    // Keep backward-compatible name used in some pages.
+    total_profit_pct: p.true_revenue > 0
+      ? (p.total_profit / p.true_revenue * 100)
       : (p.total_profit < 0 ? -100 : 0),
   }));
 
@@ -44,7 +49,7 @@ router.get('/loss-leaders', (req, res) => {
   const { limit = 15, branch } = req.query;
 
   let items = getDataset('profit_by_item.csv').filter(r => r.row_type === 'item' && (r.total_profit || 0) < 0);
-  if (branch) items = items.filter(r => r.branch === branch);
+  if (branch && branch !== 'all') items = items.filter(r => r.branch === branch);
 
   const map = {};
   items.forEach(r => {
@@ -71,22 +76,28 @@ router.get('/categories', (req, res) => {
   const { branch } = req.query;
 
   let data = cats.filter(r => r.row_type === 'category');
-  if (branch) data = data.filter(r => r.branch === branch);
+  if (branch && branch !== 'all') data = data.filter(r => r.branch === branch);
 
   const map = {};
+  const branchSets = {};
   data.forEach(r => {
     const k = r.category;
     if (!k) return;
-    if (!map[k]) map[k] = { category: k, qty: 0, total_price: 0, total_cost: 0, total_profit: 0 };
+    if (!map[k]) map[k] = { category: k, qty: 0, total_price: 0, total_cost: 0, total_profit: 0, true_revenue: 0 };
+    if (!branchSets[k]) branchSets[k] = new Set();
     map[k].qty          += (r.qty || 0);
     map[k].total_price  += (r.total_price || 0);
     map[k].total_cost   += (r.total_cost || 0);
     map[k].total_profit += (r.total_profit || 0);
+    map[k].true_revenue += ((r.total_cost || 0) + (r.total_profit || 0));
+    branchSets[k].add(r.branch);
   });
 
   const result = Object.values(map).map(c => ({
     ...c,
-    profit_margin_pct: c.total_cost > 0 ? (c.total_profit / c.total_cost * 100) : 0,
+    branch_count: branchSets[c.category] ? branchSets[c.category].size : 0,
+    avg_margin_pct: c.true_revenue > 0 ? (c.total_profit / c.true_revenue * 100) : 0,
+    profit_margin_pct: c.true_revenue > 0 ? (c.total_profit / c.true_revenue * 100) : 0,
   })).sort((a,b) => b.total_profit - a.total_profit);
 
   res.json(result);
@@ -96,7 +107,7 @@ router.get('/categories', (req, res) => {
 router.get('/groups', (req, res) => {
   const { limit = 20, branch } = req.query;
   let items = getDataset('sales_by_group.csv').filter(r => r.row_type === 'item');
-  if (branch) items = items.filter(r => r.branch === branch);
+  if (branch && branch !== 'all') items = items.filter(r => r.branch === branch);
 
   const map = {};
   items.forEach(r => {
@@ -109,7 +120,12 @@ router.get('/groups', (req, res) => {
   });
 
   const result = Object.values(map)
-    .map(g => ({ ...g, product_count: g.product_count.size }))
+    .map(g => ({
+      ...g,
+      product_count: g.product_count.size,
+      // Frontend expects total_profit-style field for visualization.
+      total_profit: g.total_amount,
+    }))
     .sort((a,b) => b.total_amount - a.total_amount)
     .slice(0, Number(limit));
 
