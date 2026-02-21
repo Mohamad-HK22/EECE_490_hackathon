@@ -6,10 +6,9 @@ import './Actions.css';
 
 const TABS = [
   { key: 'overview',     label: 'Overview' },
-  { key: 'margin',       label: '🤖 Margin Gaps' },
+  { key: 'margin',       label: '📊 Margin Gaps' },
   { key: 'price',        label: '💰 Price Anomalies' },
   { key: 'availability', label: '🗺️ Missing Products' },
-  { key: 'clusters',     label: '📊 Branch Clusters' },
 ];
 
 export default function Actions({ branch }) {
@@ -19,51 +18,16 @@ export default function Actions({ branch }) {
   const { data: residuals, loading: l2, error: e2 } = useData(() => api.mlMarginResiduals({ branch: branch !== 'all' ? branch : undefined }), [branch]);
   const { data: prices,    loading: l3, error: e3 } = useData(() => api.mlPriceAnomalies({ branch: branch !== 'all' ? branch : undefined }), [branch]);
   const { data: avail,     loading: l4, error: e4 } = useData(() => api.mlAvailabilityGaps(), []);
-  const { data: clusters,  loading: l5, error: e5 } = useData(() => api.mlBranchClusters(), []);
-  const { data: mlMeta }                             = useData(() => api.mlMetadata(), []);
 
-  const impactTotal      = React.useMemo(() => (recs      || []).reduce((s, r) => s + (r.estimated_impact   || 0), 0), [recs]);
-  const totalPricePool   = React.useMemo(() => (prices    || []).reduce((s, r) => s + (r.profit_gain        || 0), 0), [prices]);
-  const totalAvailPool   = React.useMemo(() => (avail     || []).reduce((s, r) => s + (r.expected_profit    || 0), 0), [avail]);
-  const totalResidualPool = React.useMemo(() => (residuals || []).reduce((s, r) => s + (r.uplift_potential || 0), 0), [residuals]);
-  const inferredBranchCount = React.useMemo(() => {
-    if (!Array.isArray(avail) || !avail.length) return 0;
-    return avail.reduce((max, row) => {
-      const total = (Number(row.n_present) || 0) + (Number(row.n_missing) || 0);
-      return Math.max(max, total);
-    }, 0);
-  }, [avail]);
-  const nBranches = mlMeta?.n_branches || clusters?.branches?.length || inferredBranchCount || 0;
-  const clusterSummary = React.useMemo(() => {
-    const rows = clusters?.branches || [];
-    const grouped = {};
-    rows.forEach(r => {
-      const key = Number(r.cluster);
-      if (!grouped[key]) grouped[key] = { cluster: key, n_branches: 0, marginSum: 0, revenueSum: 0 };
-      grouped[key].n_branches += 1;
-      grouped[key].marginSum += Number(r.actual_margin) || 0;
-      grouped[key].revenueSum += Number(r.total_revenue) || 0;
-    });
-    return Object.values(grouped)
-      .map(g => ({
-        cluster: g.cluster,
-        n_branches: g.n_branches,
-        avg_margin: g.n_branches ? g.marginSum / g.n_branches : 0,
-        avg_revenue: g.n_branches ? g.revenueSum / g.n_branches : 0,
-      }))
-      .sort((a, b) => a.cluster - b.cluster);
-  }, [clusters]);
-  const bestCluster = React.useMemo(() => {
-    if (!clusterSummary.length) return null;
-    return clusterSummary.reduce((best, c) => (!best || c.avg_margin > best.avg_margin ? c : best), null)?.cluster ?? null;
-  }, [clusterSummary]);
-  const kClusters = clusterSummary.length || clusters?.summary?.length || 0;
+  const impactTotal     = React.useMemo(() => (recs      || []).reduce((s, r) => s + (r.estimated_impact  || 0), 0), [recs]);
+  const totalPricePool  = React.useMemo(() => (prices    || []).reduce((s, r) => s + (r.profit_gain       || 0), 0), [prices]);
+  const totalAvailPool  = React.useMemo(() => (avail     || []).reduce((s, r) => s + (r.expected_profit   || 0), 0), [avail]);
+  const totalMarginPool = React.useMemo(() => (residuals || []).reduce((s, r) => s + (r.uplift_potential  || 0), 0), [residuals]);
 
   return (
     <PageShell
       title="Action Generator"
-      subtitle="ML-powered recommendations — every action is traceable to a trained model"
-      badge={`Model R²=${mlMeta?.model_r2 ?? '…'}`}
+      subtitle="Data-driven recommendations from your sales and margin data"
     >
       {/* Summary strip */}
       <div className="action-summary-strip">
@@ -73,9 +37,9 @@ export default function Actions({ branch }) {
           <div className="action-summary-sub">estimated uplift</div>
         </div>
         <div className="action-summary-card">
-          <div className="action-summary-label">Margin Residuals (RF)</div>
-          <div className="action-summary-val">{fmtM(totalResidualPool)} LBP</div>
-          <div className="action-summary-sub">{residuals?.length || 0} pairs · R²={mlMeta?.model_r2}</div>
+          <div className="action-summary-label">Margin Gap Pool</div>
+          <div className="action-summary-val">{fmtM(totalMarginPool)} LBP</div>
+          <div className="action-summary-sub">{residuals?.length || 0} product-branch pairs</div>
         </div>
         <div className="action-summary-card">
           <div className="action-summary-label">Price Anomalies</div>
@@ -98,11 +62,17 @@ export default function Actions({ branch }) {
         ))}
       </div>
 
-      {/* ── Overview ──────────────────────────────────────────────────────── */}
+      {/* Overview */}
       {tab === 'overview' && (
         <>
-          <Panel title="AI Recommendations" subtitle="Menu Engineering Matrix — Stars, Puzzles, Plowhorses, Dogs">
-            {l1 ? <Loader /> : e1 ? <ErrorMsg message={e1} /> : (
+          <Panel title="AI Recommendations" subtitle="Ranked by profit impact">
+            {l1 ? (
+              <div className="action-ai-loading">
+                <div className="action-ai-spinner" />
+                <div className="action-ai-loading-text">Generating recommendations…</div>
+                <div className="action-ai-loading-sub">Analysing your sales data</div>
+              </div>
+            ) : e1 ? <ErrorMsg message={e1} /> : (
               <div className="action-cards">
                 {(recs || []).map((r, i) => (
                   <div key={i} className={`action-card action-card--${r.type || 'default'}`}>
@@ -130,29 +100,29 @@ export default function Actions({ branch }) {
           </Panel>
 
           <div className="actions-row">
-            <Panel title="Top Margin Residual" subtitle="Biggest RF model gap — address first">
+            <Panel title="Top Margin Gap" subtitle="Biggest opportunity to close the margin gap">
               {l2 ? <Loader /> : residuals?.[0] ? (
-                <MLSingleCard icon="🤖" color="#166534"
+                <SingleCard icon="📊" color="#166534"
                   product={residuals[0].product_desc} branch={residuals[0].branch}
-                  label1="Actual Margin"   val1={`${residuals[0].actual_margin?.toFixed(1)}%`}
-                  label2="Model Predicts"  val2={`${residuals[0].pred_margin?.toFixed(1)}%`}
-                  label3="Uplift Pool"     val3={fmtM(residuals[0].uplift_potential) + ' LBP'} />
-              ) : <div className="action-empty">No residuals for this filter.</div>}
+                  label1="Actual Margin"  val1={`${residuals[0].actual_margin?.toFixed(1)}%`}
+                  label2="Expected"       val2={`${residuals[0].pred_margin?.toFixed(1)}%`}
+                  label3="Uplift Pool"    val3={fmtM(residuals[0].uplift_potential) + ' LBP'} />
+              ) : <div className="action-empty">No margin gaps for this filter.</div>}
             </Panel>
             <Panel title="Top Price Anomaly" subtitle="Highest profit gain from repricing">
               {l3 ? <Loader /> : prices?.[0] ? (
-                <MLSingleCard icon="💰" color="#b8974e"
+                <SingleCard icon="💰" color="#b8974e"
                   product={prices[0].product} branch={prices[0].branch}
                   label1="Current Price"  val1={`${prices[0].actual_price} LBP`}
-                  label2="Target (p75)"   val2={`${prices[0].target_price} LBP`}
+                  label2="Target Price"   val2={`${prices[0].target_price} LBP`}
                   label3="Profit Gain"    val3={fmtM(prices[0].profit_gain) + ' LBP'} />
               ) : <div className="action-empty">No price anomalies for this filter.</div>}
             </Panel>
             <Panel title="Top Availability Gap" subtitle="Highest expected profit from rollout">
               {l4 ? <Loader /> : avail?.[0] ? (
-                <MLSingleCard icon="🗺️" color="#0ea5e9"
+                <SingleCard icon="🗺️" color="#0ea5e9"
                   product={avail[0].product} branch={`Missing from ${avail[0].n_missing} branches`}
-                  label1="Present branches" val1={`${avail[0].n_present}/${nBranches}`}
+                  label1="Present branches" val1={`${avail[0].n_present}/25`}
                   label2="Avg margin"       val2={`${avail[0].avg_margin?.toFixed(1)}%`}
                   label3="Expected profit"  val3={fmtM(avail[0].expected_profit) + ' LBP'} />
               ) : <div className="action-empty">No availability gaps found.</div>}
@@ -161,13 +131,15 @@ export default function Actions({ branch }) {
         </>
       )}
 
-      {/* ── Margin Gaps ───────────────────────────────────────────────────── */}
+      {/* Margin Gaps */}
       {tab === 'margin' && (
-        <Panel title="Margin Residuals" subtitle={`RF R²=${mlMeta?.model_r2} — pairs where actual margin < predicted margin`}>
+        <Panel title="Margin Gaps" subtitle="Product-branch pairs where actual margin is below expected — sorted by uplift potential">
           {l2 ? <Loader /> : e2 ? <ErrorMsg message={e2} /> : (
             <div className="ml-table-wrap">
               <table className="ml-table">
-                <thead><tr><th>#</th><th>Product</th><th>Branch</th><th>Division</th><th>Actual %</th><th>Predicted %</th><th>Gap</th><th>Uplift Pool</th></tr></thead>
+                <thead>
+                  <tr><th>#</th><th>Product</th><th>Branch</th><th>Division</th><th>Actual %</th><th>Expected %</th><th>Gap</th><th>Uplift Pool</th></tr>
+                </thead>
                 <tbody>
                   {(residuals || []).map((r, i) => (
                     <tr key={i}>
@@ -188,13 +160,15 @@ export default function Actions({ branch }) {
         </Panel>
       )}
 
-      {/* ── Price Anomalies ───────────────────────────────────────────────── */}
+      {/* Price Anomalies */}
       {tab === 'price' && (
-        <Panel title="Price Anomalies" subtitle="Branches pricing below network p25 — raise to p75">
+        <Panel title="Price Anomalies" subtitle="Branches pricing below the network average — raise to capture missed profit">
           {l3 ? <Loader /> : e3 ? <ErrorMsg message={e3} /> : (
             <div className="ml-table-wrap">
               <table className="ml-table">
-                <thead><tr><th>#</th><th>Product</th><th>Branch</th><th>Current Price</th><th>Target (p75)</th><th>Gap %</th><th>Qty</th><th>Profit Gain</th></tr></thead>
+                <thead>
+                  <tr><th>#</th><th>Product</th><th>Branch</th><th>Current Price</th><th>Target Price</th><th>Gap %</th><th>Qty</th><th>Profit Gain</th></tr>
+                </thead>
                 <tbody>
                   {(prices || []).map((r, i) => (
                     <tr key={i}>
@@ -215,20 +189,22 @@ export default function Actions({ branch }) {
         </Panel>
       )}
 
-      {/* ── Availability ──────────────────────────────────────────────────── */}
+      {/* Availability */}
       {tab === 'availability' && (
-        <Panel title="Availability Gaps" subtitle={`Products not in all ${nBranches} branches — branch-revenue weighted regression`}>
+        <Panel title="Availability Gaps" subtitle="Products not stocked in all branches — ranked by expected profit from full rollout">
           {l4 ? <Loader /> : e4 ? <ErrorMsg message={e4} /> : (
             <div className="ml-table-wrap">
               <table className="ml-table">
-                <thead><tr><th>#</th><th>Product</th><th>Division</th><th>Present</th><th>Missing</th><th>Avg Margin</th><th>Per Branch</th><th>Expected Uplift</th></tr></thead>
+                <thead>
+                  <tr><th>#</th><th>Product</th><th>Division</th><th>Present</th><th>Missing</th><th>Avg Margin</th><th>Per Branch</th><th>Expected Uplift</th></tr>
+                </thead>
                 <tbody>
                   {(avail || []).map((r, i) => (
                     <tr key={i}>
                       <td className="ml-rank">{i + 1}</td>
                       <td className="ml-product">{r.product}</td>
                       <td><span className="trait-badge blue">{r.division?.slice(0, 16)}</span></td>
-                      <td className="ml-num">{r.n_present}/{nBranches}</td>
+                      <td className="ml-num">{r.n_present}/25</td>
                       <td className="ml-num gap">{r.n_missing}</td>
                       <td className="ml-num">{r.avg_margin?.toFixed(1)}%</td>
                       <td className="ml-num">{fmtM(r.avg_profit_per_branch)}</td>
@@ -241,78 +217,11 @@ export default function Actions({ branch }) {
           )}
         </Panel>
       )}
-
-      {/* ── Clusters ──────────────────────────────────────────────────────── */}
-      {tab === 'clusters' && (
-        <>
-          {l5 ? <Loader /> : e5 ? <ErrorMsg message={e5} /> : clusters && (
-            <>
-              <Panel title="Branch Cluster Summary" subtitle={`KMeans (k=${kClusters || '?'}) on division profit mix`}>
-                <div className="cluster-summary-grid">
-                  {(clusterSummary || []).map((c, i) => {
-                    const isBest = c.cluster === bestCluster;
-                    return (
-                      <div key={i} className={`cluster-card ${isBest ? 'cluster-card--best' : ''}`}>
-                        <div className="cluster-card-header">
-                          <span className="cluster-label">Cluster {c.cluster}</span>
-                          {isBest && <span className="cluster-best-badge">BEST</span>}
-                        </div>
-                        <div className="cluster-margin">{c.avg_margin?.toFixed(2)}%</div>
-                        <div className="cluster-meta">
-                          <span>{c.n_branches} branches</span>
-                          <span>Avg rev: {fmtM(c.avg_revenue)}</span>
-                        </div>
-                      </div>
-                    );
-                  })}
-                </div>
-                {clusters.best_cluster_drivers && (
-                  <div className="cluster-drivers">
-                    <div className="cluster-drivers-title">Divisions over-represented in best cluster:</div>
-                    <div className="cluster-drivers-list">
-                      {clusters.best_cluster_drivers.map((d, i) => (
-                        <span key={i} className="trait-badge green">{d}</span>
-                      ))}
-                    </div>
-                    <div className="cluster-drivers-note">
-                      Branches in lower clusters should increase these divisions to close the margin gap.
-                    </div>
-                  </div>
-                )}
-              </Panel>
-
-              <Panel title="Branch Cluster Assignments" subtitle="Margin gap per branch to the best cluster">
-                <div className="ml-table-wrap">
-                  <table className="ml-table">
-                    <thead><tr><th>Branch</th><th>Cluster</th><th>Actual Margin</th><th>Gap (pp)</th><th>Gap (LBP)</th><th>Revenue</th></tr></thead>
-                    <tbody>
-                      {(clusters.branches || []).sort((a, b) => b.gap_lbp - a.gap_lbp).map((r, i) => (
-                        <tr key={i} className={r.cluster === bestCluster ? 'row-best' : ''}>
-                          <td className="ml-product">{shortBranch(r.branch)}</td>
-                          <td className="ml-num">
-                            <span className={`cluster-badge cluster-badge--${r.cluster}`}>
-                              C{r.cluster}{r.cluster === bestCluster ? ' ★' : ''}
-                            </span>
-                          </td>
-                          <td className="ml-num">{r.actual_margin?.toFixed(2)}%</td>
-                          <td className="ml-num gap">{r.margin_gap > 0 ? `+${r.margin_gap?.toFixed(2)}pp` : '—'}</td>
-                          <td className="ml-num highlight">{r.gap_lbp > 0 ? fmtM(r.gap_lbp) + ' LBP' : '—'}</td>
-                          <td className="ml-num">{fmtM(r.total_revenue)}</td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
-              </Panel>
-            </>
-          )}
-        </>
-      )}
     </PageShell>
   );
 }
 
-function MLSingleCard({ icon, product, branch, label1, val1, label2, val2, label3, val3, color }) {
+function SingleCard({ icon, product, branch, label1, val1, label2, val2, label3, val3, color }) {
   return (
     <div className="ml-single-card">
       <div className="ml-single-header">

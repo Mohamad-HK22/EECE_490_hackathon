@@ -221,16 +221,15 @@
   margin-left: 8px;
 }
 .product-select-dropdown {
-  position: absolute;
-  top: calc(100% + 4px);
-  left: 0;
-  right: 0;
+  position: fixed;
   background: #ffffff;
   border: 1px solid var(--border);
   border-radius: 10px;
-  box-shadow: 0 8px 32px rgba(0,0,0,0.12);
-  z-index: 1200;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+  z-index: 9999;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }
 .product-select-search {
   width: 100%;
@@ -244,7 +243,7 @@
   outline: none;
 }
 .product-select-list {
-  max-height: 260px;
+  flex: 1;
   overflow-y: auto;
 }
 .product-select-option {

@@ -90,7 +90,7 @@ export default function Executive({ branch }) {
   const allRecs = Array.isArray(recs) ? recs : [];
 
   return (
-    <PageShell title="Executive Summary" subtitle="AI-powered profit intelligence · Real Stories Coffee data" badge="● Live Data">
+    <PageShell title="Executive Summary" subtitle="Profit dashboard · Stories Coffee" badge="● Live Data">
 
 
       {/* KPI Cards */}
@@ -167,7 +167,7 @@ export default function Executive({ branch }) {
       {/* AI Recommendations */}
       {l3 ? <Loader /> : e3 ? <ErrorMsg message={e3} /> : (
         <div>
-          <div className="section-title">AI Recommendations <span className="ai-chip">AI</span></div>
+          <div className="section-title">Recommendations</div>
           <div className="rec-grid">
             {allRecs.slice(0, 3).map((r, i) => (
               <div key={i} className={`rec-card rec-card--${r.type}`}>

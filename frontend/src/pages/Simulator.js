@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useRef, useEffect } from 'react';
 import { PageShell, Panel, Loader } from '../components/PageShell';
 import { useData } from '../hooks/useData';
 import { api } from '../utils/api';
@@ -165,10 +165,11 @@ function PriceChangeForm({ products, branches, onSimulate, onReset, loading }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (parsedNewPrice == null || parsedNewPrice < 0 || parsedNewPrice % 500 !== 0) {
-      setPriceError('Price must be in 500 LBP steps (ending in 000 or 500).');
-      return;
-    }
+if (parsedNewPrice == null || parsedNewPrice < 0) {
+  setPriceError('Enter a valid price.');
+  return;
+}
+
     setPriceError('');
     onSimulate({ type: 'price_change', product, newPrice: parsedNewPrice / LBP_SCALE, branch });
   };
@@ -181,16 +182,16 @@ function PriceChangeForm({ products, branches, onSimulate, onReset, loading }) {
       return;
     }
     setNewPrice(formatLbpInput(parsed));
-    setPriceError(parsed % 500 === 0 ? '' : 'Price must be in 500 LBP steps (ending in 000 or 500).');
+setPriceError('');
   };
 
-  const handlePriceBlur = () => {
-    const parsed = parseLbpInput(newPrice);
-    if (parsed == null) return;
-    const normalized = normalizeStep500(parsed);
-    setNewPrice(formatLbpInput(normalized));
-    setPriceError('');
-  };
+const handlePriceBlur = () => {
+  const parsed = parseLbpInput(newPrice);
+  if (parsed == null) return;
+  setNewPrice(formatLbpInput(parsed)); // keep exactly what user typed
+  setPriceError('');
+};
+
 
   return (
     <form className="sim-form" onSubmit={handleSubmit}>
@@ -200,7 +201,7 @@ function PriceChangeForm({ products, branches, onSimulate, onReset, loading }) {
 
       {selected && <ProductInfo p={selected} />}
 
-      <FormField label="New selling price (LBP)" required hint="Use thousands formatting (example: 250,000). Value must end in 000 or 500.">
+      <FormField label="New selling price (LBP)">
         <input
           className="sim-input"
           type="text"
@@ -244,10 +245,11 @@ function BundleForm({ products, branches, onSimulate, onReset, loading }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (parsedBundlePrice == null || parsedBundlePrice < 0 || parsedBundlePrice % 500 !== 0) {
-      setBundlePriceError('Bundle price must be in 500 LBP steps (ending in 000 or 500).');
-      return;
-    }
+    if (parsedBundlePrice == null || parsedBundlePrice < 0) {
+  setBundlePriceError('Enter a valid price.');
+  return;
+}
+
     setBundlePriceError('');
     onSimulate({
       type: 'bundle',
@@ -266,14 +268,14 @@ function BundleForm({ products, branches, onSimulate, onReset, loading }) {
       return;
     }
     setBundlePrice(formatLbpInput(parsed));
-    setBundlePriceError(parsed % 500 === 0 ? '' : 'Bundle price must be in 500 LBP steps (ending in 000 or 500).');
+setBundlePriceError('');
   };
 
   const handleBundlePriceBlur = () => {
     const parsed = parseLbpInput(bundlePrice);
     if (parsed == null) return;
-    setBundlePrice(formatLbpInput(normalizeStep500(parsed)));
-    setBundlePriceError('');
+setBundlePrice(formatLbpInput(parsed)); // keep as typed
+setBundlePriceError('');
   };
 
   return (
@@ -527,9 +529,13 @@ function FormField({ label, required, hint, children }) {
   );
 }
 
+const DROPDOWN_MAX_H = 280;
+
 function ProductSelect({ products, value, onChange, placeholder = 'Search or select a product…' }) {
-  const [query, setQuery] = useState('');
-  const [open, setOpen]   = useState(false);
+  const [query, setQuery]     = useState('');
+  const [open, setOpen]       = useState(false);
+  const [dropPos, setDropPos] = useState({ top: 0, left: 0, width: 0 });
+  const triggerRef            = React.useRef(null);
 
   const filtered = products
     .filter(p => p.product_desc && p.product_desc !== '' && p.product_desc.toLowerCase().includes(query.toLowerCase()))
@@ -537,9 +543,35 @@ function ProductSelect({ products, value, onChange, placeholder = 'Search or sel
 
   const selected = products.find(p => p.product_desc === value);
 
+  const openDropdown = () => {
+    if (triggerRef.current) {
+      const rect       = triggerRef.current.getBoundingClientRect();
+      const spaceBelow = window.innerHeight - rect.bottom;
+      const spaceAbove = rect.top;
+      const openUp     = spaceBelow < DROPDOWN_MAX_H + 8 && spaceAbove > spaceBelow;
+      setDropPos({
+        top:   openUp ? rect.top - DROPDOWN_MAX_H - 4 : rect.bottom + 4,
+        left:  rect.left,
+        width: rect.width,
+      });
+    }
+    setOpen(o => !o);
+  };
+
+  React.useEffect(() => {
+    if (!open) return;
+    const handler = (e) => {
+      if (triggerRef.current && !triggerRef.current.closest('.product-select').contains(e.target)) {
+        setOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handler);
+    return () => document.removeEventListener('mousedown', handler);
+  }, [open]);
+
   return (
-    <div className={`product-select ${open ? 'open' : ''}`} tabIndex={0} onBlur={e => { if (!e.currentTarget.contains(e.relatedTarget)) setOpen(false); }}>
-      <div className="product-select-trigger" onClick={() => setOpen(o => !o)}>
+    <div className="product-select">
+      <div className="product-select-trigger" ref={triggerRef} onClick={openDropdown}>
         {selected ? (
           <span className="product-select-chosen">{selected.product_desc}</span>
         ) : (
@@ -548,7 +580,10 @@ function ProductSelect({ products, value, onChange, placeholder = 'Search or sel
         <span className="product-select-arrow">{open ? '▲' : '▼'}</span>
       </div>
       {open && (
-        <div className="product-select-dropdown">
+        <div
+          className="product-select-dropdown"
+          style={{ top: dropPos.top, left: dropPos.left, width: dropPos.width, maxHeight: DROPDOWN_MAX_H }}
+        >
           <input
             className="product-select-search"
             autoFocus

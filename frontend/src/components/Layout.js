@@ -35,7 +35,7 @@ export default function Layout({ currentPage, onNavigate, branch, onBranchChange
             </svg>
           </div>
           <div className="nav-title">
-            <span className="nav-title-main">Stories Profit Genome</span>
+            <span className="nav-title-main">Storylytics</span>
             <span className="nav-title-sub">AI Decision Copilot</span>
           </div>
         </button>
