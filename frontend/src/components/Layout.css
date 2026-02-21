@@ -49,6 +49,10 @@
   transition: var(--transition);
 }
 .nav-select:hover { background-color: rgba(255,255,255,0.18); }
+.nav-select option {
+  color: #111827;
+  background: #ffffff;
+}
 .nav-avatar {
   width: 34px; height: 34px; border-radius: 50%;
   background: linear-gradient(135deg, var(--green-600), var(--green-400));

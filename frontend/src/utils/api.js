@@ -6,6 +6,14 @@ async function apiFetch(path, options = {}) {
   return res.json();
 }
 
+function toQuery(params = {}) {
+  const clean = Object.fromEntries(
+    Object.entries(params).filter(([, value]) => value !== undefined && value !== null && value !== '')
+  );
+  const qs = new URLSearchParams(clean).toString();
+  return qs ? `?${qs}` : '';
+}
+
 export const api = {
   // KPI
   kpiSummary: ()                        => apiFetch('/api/kpi/summary'),
@@ -13,34 +21,34 @@ export const api = {
   // Branches
   branches: ()                          => apiFetch('/api/branches'),
   branchCategories: (b)                 => apiFetch(`/api/branches/${encodeURIComponent(b)}/categories`),
-  branchItems: (b, params = {})         => apiFetch(`/api/branches/${encodeURIComponent(b)}/items?${new URLSearchParams(params)}`),
+  branchItems: (b, params = {})         => apiFetch(`/api/branches/${encodeURIComponent(b)}/items${toQuery(params)}`),
 
   // Products
-  topProducts: (params = {})            => apiFetch(`/api/products/top?${new URLSearchParams(params)}`),
-  lossLeaders: (params = {})            => apiFetch(`/api/products/loss-leaders?${new URLSearchParams(params)}`),
-  categories: (params = {})             => apiFetch(`/api/products/categories?${new URLSearchParams(params)}`),
-  groups: (params = {})                 => apiFetch(`/api/products/groups?${new URLSearchParams(params)}`),
+  topProducts: (params = {})            => apiFetch(`/api/products/top${toQuery(params)}`),
+  lossLeaders: (params = {})            => apiFetch(`/api/products/loss-leaders${toQuery(params)}`),
+  categories: (params = {})             => apiFetch(`/api/products/categories${toQuery(params)}`),
+  groups: (params = {})                 => apiFetch(`/api/products/groups${toQuery(params)}`),
 
   // Monthly
-  monthlyTrend: (params = {})           => apiFetch(`/api/monthly/trend?${new URLSearchParams(params)}`),
-  monthlyYoY: (params = {})             => apiFetch(`/api/monthly/yoy?${new URLSearchParams(params)}`),
-  monthlyHeatmap: (params = {})         => apiFetch(`/api/monthly/heatmap?${new URLSearchParams(params)}`),
-  monthlyBranches: (params = {})        => apiFetch(`/api/monthly/branches?${new URLSearchParams(params)}`),
+  monthlyTrend: (params = {})           => apiFetch(`/api/monthly/trend${toQuery(params)}`),
+  monthlyYoY: (params = {})             => apiFetch(`/api/monthly/yoy${toQuery(params)}`),
+  monthlyHeatmap: (params = {})         => apiFetch(`/api/monthly/heatmap${toQuery(params)}`),
+  monthlyBranches: (params = {})        => apiFetch(`/api/monthly/branches${toQuery(params)}`),
 
   // Actions (Menu Engineering)
-  recommendations: (params = {})       => apiFetch(`/api/actions/recommendations?${new URLSearchParams(params)}`),
-  promoteOpportunities: (params = {})  => apiFetch(`/api/actions/promote-opportunities?${new URLSearchParams(params)}`),
-  profitTraps: (params = {})           => apiFetch(`/api/actions/profit-traps?${new URLSearchParams(params)}`),
+  recommendations: (params = {})       => apiFetch(`/api/actions/recommendations${toQuery(params)}`),
+  promoteOpportunities: (params = {})  => apiFetch(`/api/actions/promote-opportunities${toQuery(params)}`),
+  profitTraps: (params = {})           => apiFetch(`/api/actions/profit-traps${toQuery(params)}`),
   simulate: (body)                     => apiFetch('/api/actions/simulate', {
     method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body),
   }),
 
   // ML endpoints
   mlMetadata: ()                       => apiFetch('/api/ml/metadata'),
-  mlMarginResiduals: (params = {})     => apiFetch(`/api/ml/margin-residuals?${new URLSearchParams(params)}`),
+  mlMarginResiduals: (params = {})     => apiFetch(`/api/ml/margin-residuals${toQuery(params)}`),
   mlBranchClusters: ()                 => apiFetch('/api/ml/branch-clusters'),
-  mlPriceAnomalies: (params = {})      => apiFetch(`/api/ml/price-anomalies?${new URLSearchParams(params)}`),
-  mlAvailabilityGaps: (params = {})    => apiFetch(`/api/ml/availability-gaps?${new URLSearchParams(params)}`),
+  mlPriceAnomalies: (params = {})      => apiFetch(`/api/ml/price-anomalies${toQuery(params)}`),
+  mlAvailabilityGaps: (params = {})    => apiFetch(`/api/ml/availability-gaps${toQuery(params)}`),
   mlSimulate: (body)                   => apiFetch('/api/ml/simulate', {
     method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body),
   }),

@@ -199,24 +199,39 @@
 .dna-td-name   { font-weight: 600; color: var(--text-primary); }
 .dna-td-muted  { color: var(--text-muted); }
 .dna-td-profit { font-weight: 700; color: var(--primary); white-space: nowrap; }
+.dna-th-share,
+.dna-td-share {
+  text-align: right;
+}
 
 .dna-share-bar-wrap {
-  display: flex;
+  display: grid;
+  grid-template-columns: 120px 52px;
   align-items: center;
   gap: 8px;
+  justify-content: end;
+}
+
+.dna-share-track {
+  width: 120px;
+  height: 6px;
+  border-radius: 3px;
+  background: var(--border);
+  overflow: hidden;
 }
 
 .dna-share-bar {
   height: 6px;
   background: linear-gradient(90deg, var(--primary) 0%, var(--primary-light) 100%);
   border-radius: 3px;
-  max-width: 120px;
 }
 
 .dna-share-label {
   font-size: 11px;
   color: var(--text-muted);
   white-space: nowrap;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
 }
 
 @media (max-width: 1100px) {

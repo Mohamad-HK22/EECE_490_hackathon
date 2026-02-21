@@ -47,12 +47,13 @@ router.get('/branches', (req, res) => {
 // ── GET /api/ml/margin-residuals ──────────────────────────────────────────────
 router.get('/margin-residuals', (req, res) => {
   ensureLoaded();
-  const { branch, limit = 20 } = req.query;
+  const { branch, limit } = req.query;
   let data = _residuals;
   if (branch && branch !== 'all') {
     data = data.filter(r => r.branch === branch);
   }
-  res.json(data.slice(0, Number(limit)));
+  const n = Number(limit);
+  res.json(Number.isFinite(n) && n > 0 ? data.slice(0, n) : data);
 });
 
 // ── GET /api/ml/branch-clusters ───────────────────────────────────────────────
@@ -70,19 +71,21 @@ router.get('/branch-clusters', (req, res) => {
 // ── GET /api/ml/price-anomalies ───────────────────────────────────────────────
 router.get('/price-anomalies', (req, res) => {
   ensureLoaded();
-  const { branch, limit = 20 } = req.query;
+  const { branch, limit } = req.query;
   let data = _priceAnomalies;
   if (branch && branch !== 'all') {
     data = data.filter(r => r.branch === branch);
   }
-  res.json(data.slice(0, Number(limit)));
+  const n = Number(limit);
+  res.json(Number.isFinite(n) && n > 0 ? data.slice(0, n) : data);
 });
 
 // ── GET /api/ml/availability-gaps ─────────────────────────────────────────────
 router.get('/availability-gaps', (req, res) => {
   ensureLoaded();
-  const { limit = 20 } = req.query;
-  res.json(_availGaps.slice(0, Number(limit)));
+  const { limit } = req.query;
+  const n = Number(limit);
+  res.json(Number.isFinite(n) && n > 0 ? _availGaps.slice(0, n) : _availGaps);
 });
 
 // ── POST /api/ml/simulate-scenario ───────────────────────────────────────────

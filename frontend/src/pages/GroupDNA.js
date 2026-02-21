@@ -200,7 +200,7 @@ export default function GroupDNA({ branch }) {
                   <th>Division</th>
                   <th>Total Profit</th>
                   <th>Qty Sold</th>
-                  <th>Profit Share</th>
+                  <th className="dna-th-share">Profit Share</th>
                 </tr>
               </thead>
               <tbody>
@@ -214,9 +214,11 @@ export default function GroupDNA({ branch }) {
                       <td className="dna-td-muted">{g.division}</td>
                       <td className="dna-td-profit">{fmtM(g.total_profit)}</td>
                       <td className="dna-td-muted">{Math.round(g.qty).toLocaleString()}</td>
-                      <td>
+                      <td className="dna-td-share">
                         <div className="dna-share-bar-wrap">
-                          <div className="dna-share-bar" style={{ width: `${Math.min(100, share * 3)}%` }} />
+                          <div className="dna-share-track">
+                            <div className="dna-share-bar" style={{ width: `${Math.min(100, share * 3)}%` }} />
+                          </div>
                           <span className="dna-share-label">{share.toFixed(1)}%</span>
                         </div>
                       </td>

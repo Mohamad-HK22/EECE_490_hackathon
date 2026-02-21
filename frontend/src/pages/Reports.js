@@ -2,7 +2,7 @@ import React from 'react';
 import { PageShell, Panel, Loader, ErrorMsg } from '../components/PageShell';
 import { useData } from '../hooks/useData';
 import { api, fmtM, fmtPct, shortBranch } from '../utils/api';
-import { Bar, Line } from 'react-chartjs-2';
+import { Bar } from 'react-chartjs-2';
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -21,12 +21,20 @@ ChartJS.register(CategoryScale, LinearScale, BarElement, PointElement, LineEleme
 const MONTH_LABELS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
 export default function Reports({ branch }) {
-  const { data: heatmap,  loading: l1, error: e1 } = useData(() => api.monthlyHeatmap({ branch: branch !== 'all' ? branch : undefined }), [branch]);
-  const { data: brMonths, loading: l2, error: e2 } = useData(() => api.monthlyBranches({ branch: branch !== 'all' ? branch : undefined, limit: 6 }), [branch]);
-  const { data: cats,     loading: l3, error: e3 } = useData(() => api.categories(), []);
-  const { data: top,      loading: l4, error: e4 } = useData(() => api.topProducts({ limit: 20 }), []);
+  const isAllBranches = branch === 'all';
+  const scopeLabel = isAllBranches ? 'All branches' : shortBranch(branch);
 
-  // Heatmap: month x year grid
+  const { data: heatmap, loading: l1, error: e1 } = useData(() => api.monthlyHeatmap({ branch: isAllBranches ? undefined : branch }), [branch]);
+  const { data: brMonths, loading: l2, error: e2 } = useData(() => api.monthlyBranches({ branch: isAllBranches ? undefined : branch, limit: 6 }), [branch]);
+  const { data: cats, loading: l3, error: e3 } = useData(
+    () => api.categories({ branch: isAllBranches ? undefined : branch }),
+    [branch]
+  );
+  const { data: top, loading: l4, error: e4 } = useData(
+    () => api.topProducts({ limit: 20, branch: isAllBranches ? undefined : branch }),
+    [branch]
+  );
+
   const heatRows = React.useMemo(() => {
     if (!heatmap) return [];
     const byBranch = {};
@@ -39,18 +47,20 @@ export default function Reports({ branch }) {
       .slice(0, 10);
   }, [heatmap]);
 
-  // Branch monthly stacked bar (top 6 branches)
   const brMonthChart = React.useMemo(() => {
     if (!brMonths) return null;
     const COLORS = ['#166534', '#1b7a4b', '#22c55e', '#4ade80', '#b8974e', '#0ea5e9'];
     const branches = [...new Set(brMonths.map(r => r.branch))].slice(0, 6);
-    const months   = MONTH_LABELS.slice(0, 12);
+
     return {
-      labels: months,
+      labels: MONTH_LABELS,
       datasets: branches.map((br, i) => {
         const brData = brMonths.filter(r => r.branch === br && r.year === 2025);
         const values = Array(12).fill(0);
-        brData.forEach(r => { values[(r.month_number || 1) - 1] = r.sales_amount / 1e6; });
+        brData.forEach(r => {
+          values[(r.month_number || 1) - 1] = r.sales_amount / 1e6;
+        });
+
         return {
           label: shortBranch(br),
           data: values,
@@ -66,10 +76,12 @@ export default function Reports({ branch }) {
     <PageShell
       title="Reports"
       subtitle="Full data tables and multi-dimensional analysis"
-      badge="All branches · 2025–2026"
+      badge={`${scopeLabel} - 2025-2026`}
     >
-      {/* Branch monthly stacked bar */}
-      <Panel title="Monthly Sales by Branch" subtitle="Top branches stacked — 2025 (LBP M)">
+      <Panel
+        title="Monthly Sales by Branch"
+        subtitle={isAllBranches ? 'Top branches stacked - 2025 (LBP M)' : `Monthly trend for ${scopeLabel} - 2025 (LBP M)`}
+      >
         {l2 ? <Loader /> : e2 ? <ErrorMsg message={e2} /> : (
           <div className="reports-chart-wrap">
             {brMonthChart && (
@@ -104,8 +116,10 @@ export default function Reports({ branch }) {
         )}
       </Panel>
 
-      {/* Category breakdown */}
-      <Panel title="Category Performance Summary" subtitle="BEVERAGES vs FOOD across all branches">
+      <Panel
+        title="Category Performance Summary"
+        subtitle={isAllBranches ? 'BEVERAGES vs FOOD across all branches' : `BEVERAGES vs FOOD for ${scopeLabel}`}
+      >
         {l3 ? <Loader /> : e3 ? <ErrorMsg message={e3} /> : (
           <div className="reports-cat-table-wrap">
             <table className="reports-table">
@@ -132,7 +146,7 @@ export default function Reports({ branch }) {
                       </td>
                       <td className="reports-td-profit">{fmtM(c.total_profit)} LBP</td>
                       <td className="reports-td-margin">{fmtPct(c.avg_margin_pct)}</td>
-                      <td>{c.branch_count || '—'}</td>
+                      <td>{c.branch_count || '-'}</td>
                       <td>
                         <div className="reports-share-cell">
                           <div className="reports-share-bar" style={{ width: `${share}%`, background: i === 0 ? '#166534' : '#b8974e' }} />
@@ -148,8 +162,10 @@ export default function Reports({ branch }) {
         )}
       </Panel>
 
-      {/* Heat map */}
-      <Panel title="Branch × Month Heatmap" subtitle="Sales intensity by branch and month (2025)">
+      <Panel
+        title="Branch x Month Heatmap"
+        subtitle={isAllBranches ? 'Sales intensity by branch and month (2025)' : `Sales intensity for ${scopeLabel} by month (2025)`}
+      >
         {l1 ? <Loader /> : e1 ? <ErrorMsg message={e1} /> : (
           <div className="reports-heatmap-wrap">
             <table className="heatmap-table">
@@ -170,7 +186,7 @@ export default function Reports({ branch }) {
                         <td
                           key={mi}
                           className="heatmap-cell"
-                          title={`${shortBranch(row.branch)} · ${MONTH_LABELS[mi]}: ${fmtM(v)} LBP`}
+                          title={`${shortBranch(row.branch)} - ${MONTH_LABELS[mi]}: ${fmtM(v)} LBP`}
                           style={{ background: v > 0 ? heatColor(v / maxVal) : 'transparent' }}
                         >
                           {v > 0 ? (v / 1e6).toFixed(0) : ''}
@@ -185,7 +201,6 @@ export default function Reports({ branch }) {
         )}
       </Panel>
 
-      {/* Top 20 products table */}
       <Panel title="Top 20 Products" subtitle="Ranked by total profit contribution">
         {l4 ? <Loader /> : e4 ? <ErrorMsg message={e4} /> : (
           <div className="reports-table-wrap">
@@ -223,7 +238,6 @@ export default function Reports({ branch }) {
 }
 
 function heatColor(ratio) {
-  // 0 = light cream, 1 = deep green
   const r = Math.round(248 - ratio * (248 - 22));
   const g = Math.round(247 - ratio * (247 - 101));
   const b = Math.round(244 - ratio * (244 - 52));

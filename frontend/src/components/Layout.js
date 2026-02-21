@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { useData } from '../hooks/useData';
 import { api } from '../utils/api';
 import './Layout.css';
@@ -17,6 +17,10 @@ const SECTIONS = ['Overview', 'Actions', 'Intelligence'];
 export default function Layout({ currentPage, onNavigate, branch, onBranchChange, children }) {
   const [collapsed, setCollapsed] = useState(false);
   const { data: branches } = useData(() => api.branches(), []);
+  const branchOptions = useMemo(
+    () => (branches || []).filter(b => b && b.branch).map(b => b.branch),
+    [branches]
+  );
 
   return (
     <div className="app-shell">
@@ -36,7 +40,6 @@ export default function Layout({ currentPage, onNavigate, branch, onBranchChange
           </div>
         </button>
         <div className="nav-divider" />
-        <div className="ai-badge"><span className="ai-dot" />AI Active</div>
         <div className="nav-center" />
         <div className="nav-controls">
           <select
@@ -45,8 +48,8 @@ export default function Layout({ currentPage, onNavigate, branch, onBranchChange
             onChange={e => onBranchChange(e.target.value)}
           >
             <option value="all">All Branches</option>
-            {(branches || []).map(b => (
-              <option key={b.branch} value={b.branch}>{b.branch}</option>
+            {branchOptions.map(name => (
+              <option key={name} value={name}>{name}</option>
             ))}
           </select>
           <div className="nav-avatar">SC</div>

@@ -6,7 +6,7 @@ import {
 } from 'chart.js';
 import { PageShell, KpiGrid, KpiCard, Panel, Loader, ErrorMsg, ImpactBadge } from '../components/PageShell';
 import { useData } from '../hooks/useData';
-import { api, fmtM, fmtPct, shortBranch } from '../utils/api';
+import { api, fmtM, fmtPct } from '../utils/api';
 import './Executive.css';
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Filler, Tooltip, Legend, ArcElement);
@@ -21,7 +21,6 @@ export default function Executive({ branch }) {
   const { data: trend,   loading: l2, error: e2 } = useData(() => api.monthlyTrend({ year: trendYear, branch }), [trendYear, branch]);
   const { data: recs,    loading: l3, error: e3 } = useData(() => api.recommendations({ branch }), [branch]);
   const { data: cats,    loading: l4 }             = useData(() => api.categories({ branch }), [branch]);
-  const { data: mlMeta }                           = useData(() => api.mlMetadata(), []);
 
   if (l1) return <Loader />;
   if (e1) return <ErrorMsg message={e1} />;
@@ -76,17 +75,6 @@ export default function Executive({ branch }) {
   return (
     <PageShell title="Executive Summary" subtitle="AI-powered profit intelligence · Real Stories Coffee data" badge="● Live Data">
 
-      {/* ML Model Strip */}
-      {mlMeta && (
-        <div className="exec-ml-strip">
-          <span className="exec-ml-badge">🤖 ML Models Active</span>
-          <span>Random Forest R²={mlMeta.model_r2} · {mlMeta.n_samples?.toLocaleString()} training rows</span>
-          <span>·</span>
-          <span>Total addressable pool: <strong>{fmtM(Object.values(mlMeta.pools || {}).reduce((s,v)=>s+v,0))} LBP</strong></span>
-          <span>·</span>
-          <span>Margin residuals: {fmtM(mlMeta.pools?.margin_residual)} · Price anomalies: {fmtM(mlMeta.pools?.price_standardization)} · Availability: {fmtM(mlMeta.pools?.availability_gap)}</span>
-        </div>
-      )}
 
       {/* KPI Cards */}
       <KpiGrid>

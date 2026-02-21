@@ -35,6 +35,7 @@ export default function WhatChanged({ branch }) {
     if (!branchs) return [];
     return [...branchs].sort((a,b) => b.total_profit - a.total_profit).slice(0, 8);
   }, [branchs]);
+  const maxBranchProfit = branchMovers[0]?.total_profit || 1;
 
   return (
     <PageShell title="What Changed" subtitle="Significant movements in profit, sales, and product performance" badge={`${yoyChanges.length + (top?.length||0)} signals`}>
@@ -106,9 +107,12 @@ export default function WhatChanged({ branch }) {
               <div key={b.branch} className="branch-rank-item">
                 <div className="branch-rank-num">{i+1}</div>
                 <div className="branch-rank-info">
-                  <div className="branch-rank-name">{b.branch}</div>
+                  <div className="branch-rank-name">{shortBranch(b.branch)}</div>
                   <div className="branch-rank-bar-wrap">
-                    <div className="branch-rank-bar" style={{ width: `${Math.min(100, (b.total_profit / branchMovers[0]?.total_profit) * 100)}%` }} />
+                    <div
+                      className="branch-rank-bar"
+                      style={{ width: `${Math.max(8, Math.min(100, (b.total_profit / maxBranchProfit) * 100))}%` }}
+                    />
                   </div>
                 </div>
                 <div className="branch-rank-val">{fmtM(b.total_profit)} LBP</div>

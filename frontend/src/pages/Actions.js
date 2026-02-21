@@ -16,16 +16,41 @@ export default function Actions({ branch }) {
   const [tab, setTab] = useState('overview');
 
   const { data: recs,      loading: l1, error: e1 } = useData(() => api.recommendations({ branch: branch !== 'all' ? branch : undefined }), [branch]);
-  const { data: residuals, loading: l2, error: e2 } = useData(() => api.mlMarginResiduals({ branch: branch !== 'all' ? branch : undefined, limit: 30 }), [branch]);
-  const { data: prices,    loading: l3, error: e3 } = useData(() => api.mlPriceAnomalies({ branch: branch !== 'all' ? branch : undefined, limit: 30 }), [branch]);
-  const { data: avail,     loading: l4, error: e4 } = useData(() => api.mlAvailabilityGaps({ limit: 30 }), []);
+  const { data: residuals, loading: l2, error: e2 } = useData(() => api.mlMarginResiduals({ branch: branch !== 'all' ? branch : undefined }), [branch]);
+  const { data: prices,    loading: l3, error: e3 } = useData(() => api.mlPriceAnomalies({ branch: branch !== 'all' ? branch : undefined }), [branch]);
+  const { data: avail,     loading: l4, error: e4 } = useData(() => api.mlAvailabilityGaps(), []);
   const { data: clusters,  loading: l5, error: e5 } = useData(() => api.mlBranchClusters(), []);
   const { data: mlMeta }                             = useData(() => api.mlMetadata(), []);
 
   const impactTotal      = React.useMemo(() => (recs      || []).reduce((s, r) => s + (r.estimated_impact   || 0), 0), [recs]);
   const totalPricePool   = React.useMemo(() => (prices    || []).reduce((s, r) => s + (r.profit_gain        || 0), 0), [prices]);
   const totalAvailPool   = React.useMemo(() => (avail     || []).reduce((s, r) => s + (r.expected_profit    || 0), 0), [avail]);
-  const totalResidualPool = mlMeta?.pools?.margin_residual || 0;
+  const totalResidualPool = React.useMemo(() => (residuals || []).reduce((s, r) => s + (r.uplift_potential || 0), 0), [residuals]);
+  const nBranches = mlMeta?.n_branches || clusters?.branches?.length || 25;
+  const clusterSummary = React.useMemo(() => {
+    const rows = clusters?.branches || [];
+    const grouped = {};
+    rows.forEach(r => {
+      const key = Number(r.cluster);
+      if (!grouped[key]) grouped[key] = { cluster: key, n_branches: 0, marginSum: 0, revenueSum: 0 };
+      grouped[key].n_branches += 1;
+      grouped[key].marginSum += Number(r.actual_margin) || 0;
+      grouped[key].revenueSum += Number(r.total_revenue) || 0;
+    });
+    return Object.values(grouped)
+      .map(g => ({
+        cluster: g.cluster,
+        n_branches: g.n_branches,
+        avg_margin: g.n_branches ? g.marginSum / g.n_branches : 0,
+        avg_revenue: g.n_branches ? g.revenueSum / g.n_branches : 0,
+      }))
+      .sort((a, b) => a.cluster - b.cluster);
+  }, [clusters]);
+  const bestCluster = React.useMemo(() => {
+    if (!clusterSummary.length) return null;
+    return clusterSummary.reduce((best, c) => (!best || c.avg_margin > best.avg_margin ? c : best), null)?.cluster ?? null;
+  }, [clusterSummary]);
+  const kClusters = clusterSummary.length || clusters?.summary?.length || 0;
 
   return (
     <PageShell
@@ -43,7 +68,7 @@ export default function Actions({ branch }) {
         <div className="action-summary-card">
           <div className="action-summary-label">Margin Residuals (RF)</div>
           <div className="action-summary-val">{fmtM(totalResidualPool)} LBP</div>
-          <div className="action-summary-sub">gap pool · R²={mlMeta?.model_r2}</div>
+          <div className="action-summary-sub">{residuals?.length || 0} pairs · R²={mlMeta?.model_r2}</div>
         </div>
         <div className="action-summary-card">
           <div className="action-summary-label">Price Anomalies</div>
@@ -120,7 +145,7 @@ export default function Actions({ branch }) {
               {l4 ? <Loader /> : avail?.[0] ? (
                 <MLSingleCard icon="🗺️" color="#0ea5e9"
                   product={avail[0].product} branch={`Missing from ${avail[0].n_missing} branches`}
-                  label1="Present branches" val1={`${avail[0].n_present}/25`}
+                  label1="Present branches" val1={`${avail[0].n_present}/${nBranches}`}
                   label2="Avg margin"       val2={`${avail[0].avg_margin?.toFixed(1)}%`}
                   label3="Expected profit"  val3={fmtM(avail[0].expected_profit) + ' LBP'} />
               ) : <div className="action-empty">No availability gaps found.</div>}
@@ -185,7 +210,7 @@ export default function Actions({ branch }) {
 
       {/* ── Availability ──────────────────────────────────────────────────── */}
       {tab === 'availability' && (
-        <Panel title="Availability Gaps" subtitle="Products not in all 25 branches — branch-revenue weighted regression">
+        <Panel title="Availability Gaps" subtitle={`Products not in all ${nBranches} branches — branch-revenue weighted regression`}>
           {l4 ? <Loader /> : e4 ? <ErrorMsg message={e4} /> : (
             <div className="ml-table-wrap">
               <table className="ml-table">
@@ -196,7 +221,7 @@ export default function Actions({ branch }) {
                       <td className="ml-rank">{i + 1}</td>
                       <td className="ml-product">{r.product}</td>
                       <td><span className="trait-badge blue">{r.division?.slice(0, 16)}</span></td>
-                      <td className="ml-num">{r.n_present}/25</td>
+                      <td className="ml-num">{r.n_present}/{nBranches}</td>
                       <td className="ml-num gap">{r.n_missing}</td>
                       <td className="ml-num">{r.avg_margin?.toFixed(1)}%</td>
                       <td className="ml-num">{fmtM(r.avg_profit_per_branch)}</td>
@@ -215,10 +240,10 @@ export default function Actions({ branch }) {
         <>
           {l5 ? <Loader /> : e5 ? <ErrorMsg message={e5} /> : clusters && (
             <>
-              <Panel title="Branch Cluster Summary" subtitle="KMeans (k=4) on division profit mix">
+              <Panel title="Branch Cluster Summary" subtitle={`KMeans (k=${kClusters || '?'}) on division profit mix`}>
                 <div className="cluster-summary-grid">
-                  {(clusters.summary || []).map((c, i) => {
-                    const isBest = c.cluster === clusters.best_cluster;
+                  {(clusterSummary || []).map((c, i) => {
+                    const isBest = c.cluster === bestCluster;
                     return (
                       <div key={i} className={`cluster-card ${isBest ? 'cluster-card--best' : ''}`}>
                         <div className="cluster-card-header">
@@ -255,11 +280,11 @@ export default function Actions({ branch }) {
                     <thead><tr><th>Branch</th><th>Cluster</th><th>Actual Margin</th><th>Gap (pp)</th><th>Gap (LBP)</th><th>Revenue</th></tr></thead>
                     <tbody>
                       {(clusters.branches || []).sort((a, b) => b.gap_lbp - a.gap_lbp).map((r, i) => (
-                        <tr key={i} className={r.cluster === clusters.best_cluster ? 'row-best' : ''}>
+                        <tr key={i} className={r.cluster === bestCluster ? 'row-best' : ''}>
                           <td className="ml-product">{shortBranch(r.branch)}</td>
                           <td className="ml-num">
                             <span className={`cluster-badge cluster-badge--${r.cluster}`}>
-                              C{r.cluster}{r.cluster === clusters.best_cluster ? ' ★' : ''}
+                              C{r.cluster}{r.cluster === bestCluster ? ' ★' : ''}
                             </span>
                           </td>
                           <td className="ml-num">{r.actual_margin?.toFixed(2)}%</td>

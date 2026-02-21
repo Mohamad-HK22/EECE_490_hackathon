@@ -4,17 +4,37 @@ import { useData } from '../hooks/useData';
 import { api } from '../utils/api';
 import './Simulator.css';
 
+const LBP_SCALE = 1000;
+
 // ── Helpers ───────────────────────────────────────────────────────────────────
 function fmtLBP(n) {
   if (n == null || isNaN(n)) return '—';
-  const abs = Math.abs(n);
-  if (abs >= 1_000_000) return (n / 1_000_000).toFixed(1) + 'M LBP';
-  if (abs >= 1_000)     return (n / 1_000).toFixed(0) + 'K LBP';
-  return n.toLocaleString() + ' LBP';
+  const scaled = n * LBP_SCALE;
+  const abs = Math.abs(scaled);
+  if (abs >= 1_000_000) return (scaled / 1_000_000).toFixed(1) + 'M LBP';
+  if (abs >= 1_000)     return (scaled / 1_000).toFixed(0) + 'K LBP';
+  return scaled.toLocaleString() + ' LBP';
 }
 function fmtNum(n) {
   if (n == null || isNaN(n)) return '—';
   return Number(n).toLocaleString();
+}
+function toDisplayLbp(n) {
+  if (n == null || isNaN(n)) return null;
+  return Number(n) * LBP_SCALE;
+}
+function parseLbpInput(v) {
+  const digits = String(v ?? '').replace(/[^\d]/g, '');
+  if (!digits) return null;
+  return Number(digits);
+}
+function formatLbpInput(n) {
+  if (n == null || isNaN(n)) return '';
+  return Number(n).toLocaleString('en-US');
+}
+function normalizeStep500(n) {
+  if (n == null || isNaN(n)) return null;
+  return Math.max(0, Math.round(n / 500) * 500);
 }
 function deltaClass(dir) {
   return dir === 'gain' ? 'delta-gain' : 'delta-loss';
@@ -140,13 +160,39 @@ export default function Simulator() {
 function PriceChangeForm({ products, branches, onSimulate, onReset, loading }) {
   const [product,  setProduct]  = useState('');
   const [newPrice, setNewPrice] = useState('');
+  const [priceError, setPriceError] = useState('');
   const [branch,   setBranch]   = useState('all');
 
   const selected = products.find(p => p.product_desc === product);
+  const parsedNewPrice = parseLbpInput(newPrice);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSimulate({ type: 'price_change', product, newPrice: Number(newPrice), branch });
+    if (parsedNewPrice == null || parsedNewPrice < 0 || parsedNewPrice % 500 !== 0) {
+      setPriceError('Price must be in 500 LBP steps (ending in 000 or 500).');
+      return;
+    }
+    setPriceError('');
+    onSimulate({ type: 'price_change', product, newPrice: parsedNewPrice / LBP_SCALE, branch });
+  };
+
+  const handlePriceChange = (raw) => {
+    const parsed = parseLbpInput(raw);
+    if (parsed == null) {
+      setNewPrice('');
+      setPriceError('');
+      return;
+    }
+    setNewPrice(formatLbpInput(parsed));
+    setPriceError(parsed % 500 === 0 ? '' : 'Price must be in 500 LBP steps (ending in 000 or 500).');
+  };
+
+  const handlePriceBlur = () => {
+    const parsed = parseLbpInput(newPrice);
+    if (parsed == null) return;
+    const normalized = normalizeStep500(parsed);
+    setNewPrice(formatLbpInput(normalized));
+    setPriceError('');
   };
 
   return (
@@ -157,24 +203,25 @@ function PriceChangeForm({ products, branches, onSimulate, onReset, loading }) {
 
       {selected && <ProductInfo p={selected} />}
 
-      <FormField label="New selling price (LBP)" required hint="Enter the price you want to test">
+      <FormField label="New selling price (LBP)" required hint="Use thousands formatting (example: 250,000). Value must end in 000 or 500.">
         <input
           className="sim-input"
-          type="number"
-          min="0"
-          step="500"
-          placeholder={selected ? `Current: ${fmtNum(selected.unit_price)} LBP` : 'e.g. 250000'}
+          type="text"
+          inputMode="numeric"
+          placeholder={selected ? `Current: ${fmtNum(toDisplayLbp(selected.unit_price))} LBP` : 'e.g. 250,000'}
           value={newPrice}
-          onChange={e => setNewPrice(e.target.value)}
+          onChange={e => handlePriceChange(e.target.value)}
+          onBlur={handlePriceBlur}
           required
         />
+        {priceError && <div className="sim-inline-error">{priceError}</div>}
       </FormField>
 
       <FormField label="Apply to" hint="Choose a specific branch or all branches at once">
         <BranchSelect branches={branches} value={branch} onChange={setBranch} />
       </FormField>
 
-      <FormActions loading={loading} onReset={() => { setProduct(''); setNewPrice(''); setBranch('all'); onReset(); }} disabled={!product || !newPrice} />
+      <FormActions loading={loading} onReset={() => { setProduct(''); setNewPrice(''); setPriceError(''); setBranch('all'); onReset(); }} disabled={!product || !newPrice || !!priceError} />
     </form>
   );
 }
@@ -183,6 +230,7 @@ function PriceChangeForm({ products, branches, onSimulate, onReset, loading }) {
 function BundleForm({ products, branches, onSimulate, onReset, loading }) {
   const [items, setItems]           = useState([{ product: '', qty: 1 }]);
   const [bundlePrice, setBundlePrice] = useState('');
+  const [bundlePriceError, setBundlePriceError] = useState('');
   const [dailySales, setDailySales]   = useState(10);
   const [branch, setBranch]           = useState('all');
 
@@ -195,16 +243,40 @@ function BundleForm({ products, branches, onSimulate, onReset, loading }) {
     const p = products.find(p => p.product_desc === it.product);
     return s + (p ? p.unit_price * Number(it.qty || 1) : 0);
   }, 0);
+  const parsedBundlePrice = parseLbpInput(bundlePrice);
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (parsedBundlePrice == null || parsedBundlePrice < 0 || parsedBundlePrice % 500 !== 0) {
+      setBundlePriceError('Bundle price must be in 500 LBP steps (ending in 000 or 500).');
+      return;
+    }
+    setBundlePriceError('');
     onSimulate({
       type: 'bundle',
       items: items.filter(i => i.product),
-      bundlePrice: Number(bundlePrice),
+      bundlePrice: parsedBundlePrice / LBP_SCALE,
       expectedDailySales: Number(dailySales),
       branch,
     });
+  };
+
+  const handleBundlePriceChange = (raw) => {
+    const parsed = parseLbpInput(raw);
+    if (parsed == null) {
+      setBundlePrice('');
+      setBundlePriceError('');
+      return;
+    }
+    setBundlePrice(formatLbpInput(parsed));
+    setBundlePriceError(parsed % 500 === 0 ? '' : 'Bundle price must be in 500 LBP steps (ending in 000 or 500).');
+  };
+
+  const handleBundlePriceBlur = () => {
+    const parsed = parseLbpInput(bundlePrice);
+    if (parsed == null) return;
+    setBundlePrice(formatLbpInput(normalizeStep500(parsed)));
+    setBundlePriceError('');
   };
 
   return (
@@ -234,21 +306,22 @@ function BundleForm({ products, branches, onSimulate, onReset, loading }) {
 
       {rrpTotal > 0 && (
         <div className="sim-rrp-note">
-          Individual prices add up to: <strong>{fmtNum(rrpTotal)} LBP</strong> — your bundle price below determines the discount
+          Individual prices add up to: <strong>{fmtNum(toDisplayLbp(rrpTotal))} LBP</strong> — your bundle price below determines the discount
         </div>
       )}
 
       <FormField label="Bundle price (LBP)" required hint="The single price a customer pays for the whole bundle">
         <input
           className="sim-input"
-          type="number"
-          min="0"
-          step="500"
-          placeholder="e.g. 400000"
+          type="text"
+          inputMode="numeric"
+          placeholder="e.g. 400,000"
           value={bundlePrice}
-          onChange={e => setBundlePrice(e.target.value)}
+          onChange={e => handleBundlePriceChange(e.target.value)}
+          onBlur={handleBundlePriceBlur}
           required
         />
+        {bundlePriceError && <div className="sim-inline-error">{bundlePriceError}</div>}
       </FormField>
 
       <FormField label="Expected daily sales (bundles sold per day)" hint="Your estimate of how many bundles you'll sell per day">
@@ -265,7 +338,7 @@ function BundleForm({ products, branches, onSimulate, onReset, loading }) {
         <BranchSelect branches={branches} value={branch} onChange={setBranch} />
       </FormField>
 
-      <FormActions loading={loading} onReset={() => { setItems([{ product: '', qty: 1 }]); setBundlePrice(''); setDailySales(10); setBranch('all'); onReset(); }} disabled={!bundlePrice || !items.some(i => i.product)} />
+      <FormActions loading={loading} onReset={() => { setItems([{ product: '', qty: 1 }]); setBundlePrice(''); setBundlePriceError(''); setDailySales(10); setBranch('all'); onReset(); }} disabled={!bundlePrice || !items.some(i => i.product) || !!bundlePriceError} />
     </form>
   );
 }
@@ -295,7 +368,7 @@ function SaleForm({ products, branches, onSimulate, onReset, loading }) {
 
       <FormField
         label={`Discount: ${discountPct}% off`}
-        hint={salePreview != null ? `Sale price will be ${fmtNum(salePreview)} LBP (was ${fmtNum(selected.unit_price)} LBP)` : 'Drag to set the discount'}
+        hint={salePreview != null ? `Sale price will be ${fmtNum(toDisplayLbp(salePreview))} LBP (was ${fmtNum(toDisplayLbp(selected.unit_price))} LBP)` : 'Drag to set the discount'}
       >
         <div className="sim-slider-row">
           <input
@@ -358,9 +431,9 @@ function PriceChangeResult({ r }) {
       />
 
       <div className="sim-result-grid">
-        <StatBox label="Current price"   val={fmtNum(r.currentPrice) + ' LBP'} />
-        <StatBox label="New price"       val={fmtNum(r.newPrice) + ' LBP'} />
-        <StatBox label="Unit cost"       val={fmtNum(r.unitCost) + ' LBP'}  sub="Cost stays fixed" />
+        <StatBox label="Current price"   val={fmtNum(toDisplayLbp(r.currentPrice)) + ' LBP'} />
+        <StatBox label="New price"       val={fmtNum(toDisplayLbp(r.newPrice)) + ' LBP'} />
+        <StatBox label="Unit cost"       val={fmtNum(toDisplayLbp(r.unitCost)) + ' LBP'}  sub="Cost stays fixed" />
         <StatBox label="Current margin"  val={r.currentMargin + '%'} />
         <StatBox label="New margin"      val={r.newMargin + '%'}     accent={r.newMargin < r.currentMargin ? 'red' : 'green'} />
         <StatBox label="Old profit"      val={fmtLBP(r.oldProfit)} />
@@ -387,9 +460,9 @@ function BundleResult({ r }) {
       />
 
       <div className="sim-result-grid">
-        <StatBox label="Bundle price"         val={fmtNum(r.bundlePrice) + ' LBP'} />
-        <StatBox label="Individual RRP total" val={fmtNum(r.totalIndividualRRP) + ' LBP'} sub="If sold separately" />
-        <StatBox label="Total cost"           val={fmtNum(r.totalBundleCost) + ' LBP'} />
+        <StatBox label="Bundle price"         val={fmtNum(toDisplayLbp(r.bundlePrice)) + ' LBP'} />
+        <StatBox label="Individual RRP total" val={fmtNum(toDisplayLbp(r.totalIndividualRRP)) + ' LBP'} sub="If sold separately" />
+        <StatBox label="Total cost"           val={fmtNum(toDisplayLbp(r.totalBundleCost)) + ' LBP'} />
         <StatBox label="Bundle margin"        val={r.bundleMarginPct + '%'} accent={r.bundleMarginPct > 50 ? 'green' : r.bundleMarginPct > 20 ? 'amber' : 'red'} />
         <StatBox label="Discount off RRP"     val={r.discountOffRRP + '%'} />
         <StatBox label="Monthly (bundle)"     val={fmtLBP(r.monthlyBundleProfit)} accent="green" />
@@ -402,7 +475,7 @@ function BundleResult({ r }) {
         {r.items.map((it, i) => (
           <div key={i} className="bundle-item-summary-row">
             <span className="bundle-item-name">{it.product}</span>
-            <span className="bundle-item-meta">×{it.qty} · {fmtNum(it.unitPrice)} LBP each · cost {fmtNum(it.unitCost)} LBP</span>
+            <span className="bundle-item-meta">×{it.qty} · {fmtNum(toDisplayLbp(it.unitPrice))} LBP each · cost {fmtNum(toDisplayLbp(it.unitCost))} LBP</span>
           </div>
         ))}
       </div>
@@ -424,9 +497,9 @@ function SaleResult({ r }) {
       />
 
       <div className="sim-result-grid">
-        <StatBox label="Current price"      val={fmtNum(r.currentPrice) + ' LBP'} />
-        <StatBox label="Sale price"         val={fmtNum(r.salePrice) + ' LBP'} accent="red" />
-        <StatBox label="Unit cost"          val={fmtNum(r.unitCost) + ' LBP'} />
+        <StatBox label="Current price"      val={fmtNum(toDisplayLbp(r.currentPrice)) + ' LBP'} />
+        <StatBox label="Sale price"         val={fmtNum(toDisplayLbp(r.salePrice)) + ' LBP'} accent="red" />
+        <StatBox label="Unit cost"          val={fmtNum(toDisplayLbp(r.unitCost)) + ' LBP'} />
         <StatBox label="Current margin"     val={r.currentMarginPct + '%'} />
         <StatBox label="New margin"         val={r.newMarginPct + '%'} accent={r.newMarginPct < r.currentMarginPct ? 'red' : 'green'} />
         <StatBox label="Base qty"           val={fmtNum(r.baseQty)} sub="YTD units (this period)" />
@@ -468,7 +541,7 @@ function ProductSelect({ products, value, onChange, placeholder = 'Search or sel
   const selected = products.find(p => p.product_desc === value);
 
   return (
-    <div className="product-select" tabIndex={0} onBlur={e => { if (!e.currentTarget.contains(e.relatedTarget)) setOpen(false); }}>
+    <div className={`product-select ${open ? 'open' : ''}`} tabIndex={0} onBlur={e => { if (!e.currentTarget.contains(e.relatedTarget)) setOpen(false); }}>
       <div className="product-select-trigger" onClick={() => setOpen(o => !o)}>
         {selected ? (
           <span className="product-select-chosen">{selected.product_desc}</span>
@@ -496,7 +569,7 @@ function ProductSelect({ products, value, onChange, placeholder = 'Search or sel
                 onMouseDown={() => { onChange(p.product_desc); setOpen(false); setQuery(''); }}
               >
                 <span className="pso-name">{p.product_desc}</span>
-                <span className="pso-meta">{fmtNum(p.unit_price)} LBP · {p.avg_margin}% margin</span>
+                <span className="pso-meta">{fmtNum(toDisplayLbp(p.unit_price))} LBP · {p.avg_margin}% margin</span>
               </div>
             ))}
           </div>
@@ -520,7 +593,7 @@ function BranchSelect({ branches, value, onChange }) {
 function ProductInfo({ p }) {
   return (
     <div className="product-info-bar">
-      <div className="pib-item"><span className="pib-label">Current price</span><span className="pib-val">{fmtNum(p.unit_price)} LBP</span></div>
+      <div className="pib-item"><span className="pib-label">Current price</span><span className="pib-val">{fmtNum(toDisplayLbp(p.unit_price))} LBP</span></div>
       <div className="pib-item"><span className="pib-label">Avg margin</span><span className="pib-val">{p.avg_margin}%</span></div>
       <div className="pib-item"><span className="pib-label">Category</span><span className="pib-val">{p.category}</span></div>
       <div className="pib-item"><span className="pib-label">Division</span><span className="pib-val">{p.division}</span></div>
