@@ -1,7 +1,7 @@
 import React from 'react';
 import { PageShell, Panel, Loader, ErrorMsg } from '../components/PageShell';
 import { useData } from '../hooks/useData';
-import { api, fmtM, fmtPct, shortBranch } from '../utils/api';
+import { api, fmtM, shortBranch } from '../utils/api';
 import './WhatChanged.css';
 
 export default function WhatChanged({ branch }) {
@@ -10,9 +10,16 @@ export default function WhatChanged({ branch }) {
   const { data: yoy,     loading: l3, error: e3 } = useData(() => api.monthlyYoY({ branch }), [branch]);
   const { data: branchs, loading: l4 }             = useData(() => api.branches(), []);
 
+  const yearPair = React.useMemo(() => {
+    const years = [...new Set((yoy || []).map(r => Number(r.year)).filter(Number.isFinite))].sort((a, b) => a - b);
+    if (years.length < 2) return null;
+    return { baseYear: years[years.length - 2], compareYear: years[years.length - 1] };
+  }, [yoy]);
+
   // Compute YoY changes per month
   const yoyChanges = React.useMemo(() => {
-    if (!yoy) return [];
+    if (!yoy || !yearPair) return [];
+    const { baseYear, compareYear } = yearPair;
     const by = {};
     yoy.forEach(r => {
       const k = r.period;
@@ -21,14 +28,14 @@ export default function WhatChanged({ branch }) {
     });
     return Object.entries(by)
       .map(([period, years]) => {
-        const s25 = years[2025] || 0;
-        const s26 = years[2026] || 0;
-        const pct = s25 > 0 ? ((s26 - s25) / s25 * 100) : null;
-        return { period, s25, s26, pct };
+        const baseSales = years[baseYear] || 0;
+        const compareSales = years[compareYear] || 0;
+        const pct = baseSales > 0 ? ((compareSales - baseSales) / baseSales * 100) : null;
+        return { period, baseSales, compareSales, pct };
       })
-      .filter(r => r.s25 > 0 && r.s26 > 0)
+      .filter(r => r.baseSales > 0 && r.compareSales > 0)
       .sort((a,b) => (b.pct||0) - (a.pct||0));
-  }, [yoy]);
+  }, [yoy, yearPair]);
 
   // Branch movers
   const branchMovers = React.useMemo(() => {
@@ -41,9 +48,16 @@ export default function WhatChanged({ branch }) {
     <PageShell title="What Changed" subtitle="Significant movements in profit, sales, and product performance" badge={`${yoyChanges.length + (top?.length||0)} signals`}>
 
       {/* YoY Month Comparison */}
-      <Panel title="Year-over-Year: Monthly Sales" subtitle="2025 vs 2026 (where 2026 data available)">
+      <Panel
+        title="Year-over-Year: Monthly Sales"
+        subtitle={yearPair ? `${yearPair.baseYear} vs ${yearPair.compareYear}` : 'No two comparable years available'}
+      >
         {l3 ? <Loader /> : e3 ? <ErrorMsg message={e3} /> : yoyChanges.length === 0 ? (
-          <div style={{ color: 'var(--text-muted)', fontSize: 13, padding: '16px 0' }}>No overlapping months between 2025 and 2026 for selected branch.</div>
+          <div style={{ color: 'var(--text-muted)', fontSize: 13, padding: '16px 0' }}>
+            {yearPair
+              ? `No overlapping months between ${yearPair.baseYear} and ${yearPair.compareYear} for selected branch.`
+              : 'Not enough yearly data to calculate YoY.'}
+          </div>
         ) : (
           <div className="change-list">
             {yoyChanges.map(r => (
@@ -51,7 +65,9 @@ export default function WhatChanged({ branch }) {
                 <div className={`change-dot ${(r.pct||0) >= 0 ? 'up' : 'down'}`} />
                 <div className="change-content">
                   <div className="change-title">{r.period.charAt(0).toUpperCase() + r.period.slice(1)} — YoY Sales</div>
-                  <div className="change-desc">2025: {fmtM(r.s25)} LBP &nbsp;→&nbsp; 2026: {fmtM(r.s26)} LBP</div>
+                  <div className="change-desc">
+                    {yearPair.baseYear}: {fmtM(r.baseSales)} LBP &nbsp;→&nbsp; {yearPair.compareYear}: {fmtM(r.compareSales)} LBP
+                  </div>
                 </div>
                 <div className={`change-delta ${(r.pct||0) >= 0 ? 'up' : 'down'}`}>
                   {r.pct !== null ? ((r.pct >= 0 ? '+' : '') + r.pct.toFixed(1) + '%') : '—'}

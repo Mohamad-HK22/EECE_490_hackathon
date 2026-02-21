@@ -23,9 +23,17 @@ const MONTH_LABELS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'S
 export default function Reports({ branch }) {
   const isAllBranches = branch === 'all';
   const scopeLabel = isAllBranches ? 'All branches' : shortBranch(branch);
+  const [selectedYear, setSelectedYear] = React.useState('');
 
-  const { data: heatmap, loading: l1, error: e1 } = useData(() => api.monthlyHeatmap({ branch: isAllBranches ? undefined : branch }), [branch]);
-  const { data: brMonths, loading: l2, error: e2 } = useData(() => api.monthlyBranches({ branch: isAllBranches ? undefined : branch, limit: 6 }), [branch]);
+  const { data: heatmap, loading: l1, error: e1 } = useData(
+    () => api.monthlyHeatmap({ branch: isAllBranches ? undefined : branch, year: selectedYear || undefined }),
+    [branch, selectedYear]
+  );
+  const { data: brMonths, loading: l2, error: e2 } = useData(
+    () => api.monthlyBranches({ branch: isAllBranches ? undefined : branch, limit: 6, year: selectedYear || undefined }),
+    [branch, selectedYear]
+  );
+  const { data: yoy } = useData(() => api.monthlyYoY({ branch: isAllBranches ? undefined : branch }), [branch]);
   const { data: cats, loading: l3, error: e3 } = useData(
     () => api.categories({ branch: isAllBranches ? undefined : branch }),
     [branch]
@@ -34,6 +42,24 @@ export default function Reports({ branch }) {
     () => api.topProducts({ limit: 20, branch: isAllBranches ? undefined : branch }),
     [branch]
   );
+
+  const availableYears = React.useMemo(() => {
+    const years = [
+      ...(yoy || []).map(r => Number(r.year)),
+      ...(heatmap || []).map(r => Number(r.year)),
+      ...(brMonths || []).map(r => Number(r.year)),
+    ].filter(Number.isFinite);
+    return [...new Set(years)].sort((a, b) => a - b);
+  }, [yoy, heatmap, brMonths]);
+  React.useEffect(() => {
+    if (!availableYears.length) return;
+    if (selectedYear && availableYears.includes(Number(selectedYear))) return;
+    setSelectedYear(String(availableYears[availableYears.length - 1]));
+  }, [availableYears, selectedYear]);
+  const selectedYearNum = selectedYear ? Number(selectedYear) : null;
+  const yearRangeLabel = availableYears.length
+    ? (availableYears.length === 1 ? `${availableYears[0]}` : `${availableYears[0]}-${availableYears[availableYears.length - 1]}`)
+    : 'No year data';
 
   const heatRows = React.useMemo(() => {
     if (!heatmap) return [];
@@ -55,7 +81,7 @@ export default function Reports({ branch }) {
     return {
       labels: MONTH_LABELS,
       datasets: branches.map((br, i) => {
-        const brData = brMonths.filter(r => r.branch === br && r.year === 2025);
+        const brData = brMonths.filter(r => r.branch === br && Number(r.year) === selectedYearNum);
         const values = Array(12).fill(0);
         brData.forEach(r => {
           values[(r.month_number || 1) - 1] = r.sales_amount / 1e6;
@@ -70,17 +96,39 @@ export default function Reports({ branch }) {
         };
       }),
     };
-  }, [brMonths]);
+  }, [brMonths, selectedYearNum]);
 
   return (
     <PageShell
       title="Reports"
       subtitle="Full data tables and multi-dimensional analysis"
-      badge={`${scopeLabel} - 2025-2026`}
+      badge={`${scopeLabel} - ${yearRangeLabel}`}
     >
+      {availableYears.length > 0 && (
+        <div className="reports-year-switch">
+          <span className="reports-year-label">Year</span>
+          {availableYears.map(year => {
+            const y = String(year);
+            return (
+              <button
+                key={y}
+                className={`reports-year-btn ${selectedYear === y ? 'active' : ''}`}
+                onClick={() => setSelectedYear(y)}
+              >
+                {y}
+              </button>
+            );
+          })}
+        </div>
+      )}
+
       <Panel
         title="Monthly Sales by Branch"
-        subtitle={isAllBranches ? 'Top branches stacked - 2025 (LBP M)' : `Monthly trend for ${scopeLabel} - 2025 (LBP M)`}
+        subtitle={selectedYearNum == null
+          ? 'No monthly data available'
+          : (isAllBranches
+            ? `Top branches stacked - ${selectedYearNum} (LBP M)`
+            : `Monthly trend for ${scopeLabel} - ${selectedYearNum} (LBP M)`)}
       >
         {l2 ? <Loader /> : e2 ? <ErrorMsg message={e2} /> : (
           <div className="reports-chart-wrap">
@@ -164,7 +212,11 @@ export default function Reports({ branch }) {
 
       <Panel
         title="Branch x Month Heatmap"
-        subtitle={isAllBranches ? 'Sales intensity by branch and month (2025)' : `Sales intensity for ${scopeLabel} by month (2025)`}
+        subtitle={selectedYearNum == null
+          ? 'No monthly data available'
+          : (isAllBranches
+            ? `Sales intensity by branch and month (${selectedYearNum})`
+            : `Sales intensity for ${scopeLabel} by month (${selectedYearNum})`)}
       >
         {l1 ? <Loader /> : e1 ? <ErrorMsg message={e1} /> : (
           <div className="reports-heatmap-wrap">
@@ -177,7 +229,7 @@ export default function Reports({ branch }) {
               </thead>
               <tbody>
                 {heatRows.map(row => {
-                  const vals = MONTH_LABELS.map((_, mi) => row.months[`2025-${mi + 1}`] || 0);
+                  const vals = MONTH_LABELS.map((_, mi) => (selectedYearNum == null ? 0 : row.months[`${selectedYearNum}-${mi + 1}`] || 0));
                   const maxVal = Math.max(...vals, 1);
                   return (
                     <tr key={row.branch}>

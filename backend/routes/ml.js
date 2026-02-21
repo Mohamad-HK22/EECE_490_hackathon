@@ -26,6 +26,14 @@ function ensureLoaded() {
   }
 }
 
+function getBranchCount() {
+  const fromList = Array.isArray(_branches) ? _branches.length : 0;
+  const fromMeta = Number(_meta?.n_branches);
+  if (fromList > 0) return fromList;
+  if (Number.isFinite(fromMeta) && fromMeta > 0) return fromMeta;
+  return 1;
+}
+
 // ── GET /api/ml/metadata ──────────────────────────────────────────────────────
 router.get('/metadata', (req, res) => {
   ensureLoaded();
@@ -96,7 +104,7 @@ router.get('/availability-gaps', (req, res) => {
 //    body: { type: 'price_change', product, newPrice, branch }
 //    Logic:
 //      - Look up product in catalog (cost_pct, current unit_price, total_qty)
-//      - If branch specified, scale qty to that branch's share (~1/25)
+//      - If branch specified, scale qty to that branch's share (~1 / number_of_branches)
 //      - New revenue  = qty × newPrice
 //      - Cost stays fixed (unit_cost = unit_price × cost_pct / 100)
 //      - New profit   = new_revenue − (qty × unit_cost)
@@ -144,7 +152,7 @@ router.post('/simulate-scenario', (req, res) => {
     const unitCost    = p.unit_price * (p.cost_pct / 100);
     let   qty         = p.total_qty;
     const branchNote  = branch && branch !== 'all' ? branch : null;
-    if (branchNote) qty = qty / 25;   // approximate single-branch share
+    if (branchNote) qty = qty / getBranchCount();   // approximate single-branch share
 
     const oldProfit   = qty * (p.unit_price - unitCost);
     const newProfit   = qty * (Number(newPrice) - unitCost);
@@ -245,7 +253,7 @@ router.post('/simulate-scenario', (req, res) => {
     const unitCost    = p.unit_price * (p.cost_pct / 100);
     let   baseQty     = p.total_qty;
     const branchNote  = branch && branch !== 'all' ? branch : null;
-    if (branchNote) baseQty = baseQty / 25;
+    if (branchNote) baseQty = baseQty / getBranchCount();
 
     const disc        = Number(discountPct) || 0;
     const boost       = Number(volumeBoost) || 0;

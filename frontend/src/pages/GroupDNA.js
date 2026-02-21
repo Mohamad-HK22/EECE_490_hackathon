@@ -62,6 +62,10 @@ export default function GroupDNA({ branch }) {
     if (!branches) return [];
     return [...branches].sort((a, b) => b.total_profit - a.total_profit).slice(0, 5);
   }, [branches]);
+  const categorySubtitle = React.useMemo(() => {
+    if (!cats?.length) return 'Category comparison';
+    return `${cats.map(c => c.category).join(' vs ')} profit comparison`;
+  }, [cats]);
 
   return (
     <PageShell
@@ -105,7 +109,7 @@ export default function GroupDNA({ branch }) {
         </Panel>
 
         {/* Category bar */}
-        <Panel title="Category Split" subtitle="BEVERAGES vs FOOD profit comparison">
+        <Panel title="Category Split" subtitle={categorySubtitle}>
           {l2 ? <Loader /> : e2 ? <ErrorMsg message={e2} /> : (
             <div className="dna-chart-wrap dna-chart-wrap--bar">
               {catBar && (
@@ -259,8 +263,8 @@ function CircleRing({ pct, color }) {
 
 function BranchDNACard({ branch: b, rank, maxProfit }) {
   const profitPct = (b.total_profit / maxProfit) * 100;
-  const bevPct    = b.bev_profit_pct  ?? 77;
-  const foodPct   = b.food_profit_pct ?? 23;
+  const bevPct    = Number(b.bev_profit_pct) || 0;
+  const foodPct   = Number(b.food_profit_pct) || 0;
   return (
     <div className="dna-branch-card">
       <div className="dna-branch-rank">#{rank}</div>

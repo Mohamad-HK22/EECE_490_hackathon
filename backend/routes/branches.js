@@ -5,7 +5,8 @@ const { getDataset } = require('../utils/csvLoader');
 // GET /api/branches
 router.get('/', (req, res) => {
   const cats = getDataset('profit_by_category.csv');
-  const ms   = getDataset('monthly_sales_long.csv');
+  const ms   = getDataset('monthly_sales_long.csv')
+    .filter(r => r.period_type === 'month');
 
   const branchMap = {};
   const catMix = {};
@@ -28,16 +29,30 @@ router.get('/', (req, res) => {
     else catMix[r.branch].other += p;
   });
 
-  // Add 2025 sales from monthly
-  const ms2025 = ms.filter(r => r.year === 2025 && r.period_type === 'month');
+  // Add sales for latest available year
+  const years = [...new Set(ms.map(r => Number(r.year)).filter(Number.isFinite))].sort((a, b) => a - b);
+  const latestYear = years[years.length - 1] ?? null;
   const salesByBranch = {};
-  ms2025.forEach(r => {
-    salesByBranch[r.branch] = (salesByBranch[r.branch] || 0) + (r.sales_amount || 0);
+  ms
+    .filter(r => latestYear !== null && Number(r.year) === latestYear)
+    .forEach(r => {
+      salesByBranch[r.branch] = (salesByBranch[r.branch] || 0) + (r.sales_amount || 0);
+    });
+
+  // Keep backward compatibility with existing frontend field name.
+  const sales2025ByBranch = {};
+  ms
+    .filter(r => Number(r.year) === 2025)
+    .forEach(r => {
+      sales2025ByBranch[r.branch] = (sales2025ByBranch[r.branch] || 0) + (r.sales_amount || 0);
   });
 
   const branches = Object.values(branchMap).map(b => ({
     ...b,
-    sales_2025: salesByBranch[b.branch] || 0,
+    sales_year: latestYear,
+    sales_latest: salesByBranch[b.branch] || 0,
+    sales_latest_year: latestYear,
+    sales_2025: sales2025ByBranch[b.branch] || 0,
     bev_profit_pct: (() => {
       const mix = catMix[b.branch];
       if (!mix) return 0;

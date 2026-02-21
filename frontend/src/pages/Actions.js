@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { PageShell, Panel, Loader, ErrorMsg, ImpactBadge } from '../components/PageShell';
 import { useData } from '../hooks/useData';
-import { api, fmtM, fmtPct, shortBranch } from '../utils/api';
+import { api, fmtM, shortBranch } from '../utils/api';
 import './Actions.css';
 
 const TABS = [
@@ -26,7 +26,14 @@ export default function Actions({ branch }) {
   const totalPricePool   = React.useMemo(() => (prices    || []).reduce((s, r) => s + (r.profit_gain        || 0), 0), [prices]);
   const totalAvailPool   = React.useMemo(() => (avail     || []).reduce((s, r) => s + (r.expected_profit    || 0), 0), [avail]);
   const totalResidualPool = React.useMemo(() => (residuals || []).reduce((s, r) => s + (r.uplift_potential || 0), 0), [residuals]);
-  const nBranches = mlMeta?.n_branches || clusters?.branches?.length || 25;
+  const inferredBranchCount = React.useMemo(() => {
+    if (!Array.isArray(avail) || !avail.length) return 0;
+    return avail.reduce((max, row) => {
+      const total = (Number(row.n_present) || 0) + (Number(row.n_missing) || 0);
+      return Math.max(max, total);
+    }, 0);
+  }, [avail]);
+  const nBranches = mlMeta?.n_branches || clusters?.branches?.length || inferredBranchCount || 0;
   const clusterSummary = React.useMemo(() => {
     const rows = clusters?.branches || [];
     const grouped = {};

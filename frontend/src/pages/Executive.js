@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState, useEffect } from 'react';
 import { Line, Doughnut } from 'react-chartjs-2';
 import {
   Chart as ChartJS, CategoryScale, LinearScale, PointElement,
@@ -15,15 +15,32 @@ const MONTH_LABELS = { january:'Jan', february:'Feb', march:'Mar', april:'Apr', 
   june:'Jun', july:'Jul', august:'Aug', september:'Sep', october:'Oct', november:'Nov', december:'Dec' };
 
 export default function Executive({ branch }) {
-  const [trendYear, setTrendYear] = useState('2025');
+  const [trendYear, setTrendYear] = useState('');
 
   const { data: kpi,     loading: l1, error: e1 } = useData(() => api.kpiSummary(), []);
   const { data: trend,   loading: l2, error: e2 } = useData(() => api.monthlyTrend({ year: trendYear, branch }), [trendYear, branch]);
+  const { data: yoy }                               = useData(() => api.monthlyYoY({ branch }), [branch]);
   const { data: recs,    loading: l3, error: e3 } = useData(() => api.recommendations({ branch }), [branch]);
   const { data: cats,    loading: l4 }             = useData(() => api.categories({ branch }), [branch]);
+  const { data: mlMeta }                           = useData(() => api.mlMetadata(), []);
+
+  const availableYears = useMemo(() => {
+    const years = [...new Set((yoy || []).map(r => Number(r.year)).filter(Number.isFinite))].sort((a, b) => a - b);
+    return years;
+  }, [yoy]);
+
+  useEffect(() => {
+    if (!availableYears.length) return;
+    if (trendYear && availableYears.includes(Number(trendYear))) return;
+    setTrendYear(String(availableYears[availableYears.length - 1]));
+  }, [availableYears, trendYear]);
 
   if (l1) return <Loader />;
   if (e1) return <ErrorMsg message={e1} />;
+
+  const marginTarget = mlMeta?.avg_margin_baseline ?? kpi.avgMarginPct;
+  const yearButtons = availableYears.length ? availableYears.map(String) : (trendYear ? [trendYear] : []);
+  const bestMonthTitle = kpi.bestMonthYear ? `Best Month ${kpi.bestMonthYear}` : 'Best Month';
 
   const chartData = {
     labels: (trend || []).map(r => MONTH_LABELS[r.period] || r.period),
@@ -79,7 +96,7 @@ export default function Executive({ branch }) {
       {/* KPI Cards */}
       <KpiGrid>
         <KpiCard label="Total Profit"        value={fmtM(kpi.totalProfit) + ' LBP'} icon="💰" trend={kpi.yoyChangePct} trendLabel="YoY" />
-        <KpiCard label="Avg Profit Margin"   value={fmtPct(kpi.avgMarginPct)}        icon="📈" trend={kpi.avgMarginPct - 65} trendLabel="vs 65% target" />
+        <KpiCard label="Avg Profit Margin"   value={fmtPct(kpi.avgMarginPct)}        icon="📈" trend={kpi.avgMarginPct - marginTarget} trendLabel={`vs ${marginTarget.toFixed(1)}% baseline`} />
         <KpiCard label="Top Category"        value={kpi.topCategory}                 icon="☕" />
         <KpiCard label="Opportunity"         value={fmtM(kpi.optimizationOpportunity) + ' LBP'} icon="🎯" accent />
       </KpiGrid>
@@ -90,7 +107,7 @@ export default function Executive({ branch }) {
         subtitle="Total sales across all branches"
         actions={
           <div className="pill-group">
-            {['2025','2026'].map(y => (
+            {yearButtons.map(y => (
               <button key={y} className={`pill-btn ${trendYear === y ? 'active' : ''}`} onClick={() => setTrendYear(y)}>{y}</button>
             ))}
           </div>
@@ -141,7 +158,7 @@ export default function Executive({ branch }) {
             </div>
             <div className="stat-item">
               <div className="stat-val">{kpi.bestMonth?.charAt(0).toUpperCase() + (kpi.bestMonth?.slice(1) || '')}</div>
-              <div className="stat-lbl">Best Month 2025</div>
+              <div className="stat-lbl">{bestMonthTitle}</div>
             </div>
           </div>
         </Panel>
@@ -157,7 +174,7 @@ export default function Executive({ branch }) {
                 <div className="rec-icon">{r.icon}</div>
                 <div className="rec-title">{r.title}</div>
                 <div className="rec-desc">{r.description}</div>
-                <ImpactBadge value={Math.round(r.impact)} />
+                <ImpactBadge value={Math.round(r.estimated_impact || 0)} />
                 {r.product && r.type !== 'optimize' && (
                   <div className="rec-meta">
                     {r.category && <span className="trait-badge green">{r.category}</span>}

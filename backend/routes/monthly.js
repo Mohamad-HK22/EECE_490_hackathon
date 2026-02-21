@@ -4,13 +4,33 @@ const { getDataset } = require('../utils/csvLoader');
 
 const MONTH_ORDER = ['january','february','march','april','may','june','july','august','september','october','november','december'];
 
+function getMonthlyBranchRows() {
+  return getDataset('monthly_sales_long.csv')
+    .filter(r => r.period_type === 'month' && r.row_type === 'branch');
+}
+
+function getAvailableYears(rows) {
+  return [...new Set(rows.map(r => Number(r.year)).filter(Number.isFinite))].sort((a, b) => a - b);
+}
+
+function resolveYear(requested, rows) {
+  const years = getAvailableYears(rows);
+  if (!years.length) return null;
+  if (requested !== undefined && requested !== null && requested !== '') {
+    const parsed = Number(requested);
+    if (Number.isFinite(parsed)) return parsed;
+  }
+  return years[years.length - 1];
+}
+
 // GET /api/monthly/trend?year=2025&branch=all
 router.get('/trend', (req, res) => {
   const { year, branch } = req.query;
-  let data = getDataset('monthly_sales_long.csv')
-    .filter(r => r.period_type === 'month' && r.row_type === 'branch');
+  const allRows = getMonthlyBranchRows();
+  const selectedYear = resolveYear(year, allRows);
+  let data = allRows;
 
-  if (year)   data = data.filter(r => String(r.year) === String(year));
+  if (selectedYear !== null) data = data.filter(r => Number(r.year) === selectedYear);
   if (branch && branch !== 'all') data = data.filter(r => r.branch === branch);
 
   const monthMap = {};
@@ -30,8 +50,7 @@ router.get('/trend', (req, res) => {
 // GET /api/monthly/yoy
 router.get('/yoy', (req, res) => {
   const { branch } = req.query;
-  let data = getDataset('monthly_sales_long.csv')
-    .filter(r => r.period_type === 'month' && r.row_type === 'branch');
+  let data = getMonthlyBranchRows();
   if (branch && branch !== 'all') data = data.filter(r => r.branch === branch);
 
   const result = {};
@@ -51,9 +70,11 @@ router.get('/yoy', (req, res) => {
 
 // GET /api/monthly/heatmap?year=2025
 router.get('/heatmap', (req, res) => {
-  const { year = 2025, branch } = req.query;
-  let data = getDataset('monthly_sales_long.csv')
-    .filter(r => String(r.year) === String(year) && r.row_type === 'branch' && r.period_type === 'month');
+  const { year, branch } = req.query;
+  const allRows = getMonthlyBranchRows();
+  const selectedYear = resolveYear(year, allRows);
+  let data = allRows;
+  if (selectedYear !== null) data = data.filter(r => Number(r.year) === selectedYear);
   if (branch && branch !== 'all') data = data.filter(r => r.branch === branch);
 
   const result = data
@@ -74,22 +95,26 @@ router.get('/heatmap', (req, res) => {
 
 // GET /api/monthly/branches?year=2025&limit=6
 router.get('/branches', (req, res) => {
-  const { year = 2025, branch, limit = 6 } = req.query;
-  const y = String(year);
+  const { year, branch, limit } = req.query;
+  const monthlyRows = getMonthlyBranchRows();
+  const selectedYear = resolveYear(year, monthlyRows);
+  if (selectedYear === null) return res.json([]);
+  const n = Number(limit);
+  const hasLimit = Number.isFinite(n) && n > 0;
 
   let topBranches;
   if (branch && branch !== 'all') {
     topBranches = [branch];
   } else {
     const wide = getDataset('monthly_sales_wide.csv')
-      .filter(r => String(r.year) === y && r.row_type === 'branch')
+      .filter(r => Number(r.year) === selectedYear && r.row_type === 'branch')
       .sort((a,b) => (b.total_by_year||0) - (a.total_by_year||0))
-      .slice(0, Number(limit));
+      .slice(0, hasLimit ? n : undefined);
     topBranches = wide.map(r => r.branch);
   }
 
-  const result = getDataset('monthly_sales_long.csv')
-    .filter(r => String(r.year) === y && r.row_type === 'branch' && r.period_type === 'month' && topBranches.includes(r.branch))
+  const result = monthlyRows
+    .filter(r => Number(r.year) === selectedYear && topBranches.includes(r.branch))
     .map(r => ({
       branch: r.branch,
       year: r.year,

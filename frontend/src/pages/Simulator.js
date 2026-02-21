@@ -36,9 +36,6 @@ function normalizeStep500(n) {
   if (n == null || isNaN(n)) return null;
   return Math.max(0, Math.round(n / 500) * 500);
 }
-function deltaClass(dir) {
-  return dir === 'gain' ? 'delta-gain' : 'delta-loss';
-}
 function deltaSign(dir) {
   return dir === 'gain' ? '+' : '';
 }
