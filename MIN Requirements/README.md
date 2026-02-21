@@ -86,5 +86,25 @@ Peak periods and lower periods suggest opportunities for demand-based promotion 
 ---
 
 ## 🚀 How to Run the Analysis
+To run the Analysis you can either view the live dashboard in this live application:
+https://eece-490-hackathon1.onrender.com/  (may take some seconds to load since deploy server was free)
+(UI only for desktop not mobile)
 
-### Requirements
+(in case link doesnt work cd backend npm start. and cd frontend npm start)
+
+the dashboard allows users to :
+
+-Explore KPI summaries
+
+-Analyze profit concentration
+
+-Identify top profit performers
+
+-Detect loss-making products
+
+-View monthly and branch-level performance
+
+
+or you can run the exploratory Data analysis found in the "MIN Requirements" folder. Run all cells to clean raw sales data , compute derived metrics, and generate distribution plots.
+
+
