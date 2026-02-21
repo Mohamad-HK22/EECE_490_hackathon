@@ -1,6 +1,6 @@
 # Cleaned Stories Reports
 
-This folder contains cleaned outputs generated from the 4 raw report exports in `/Users/mohamad22/Desktop/EECE_490_hackathon/Archive/Stories_data`.
+This folder contains cleaned outputs generated from the 4 raw report exports in `EECE_490_hackathon/Archive/Stories_data`.
 
 ## Per-file summary
 
