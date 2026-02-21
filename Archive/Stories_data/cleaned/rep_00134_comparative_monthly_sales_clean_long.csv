@@ -1,0 +1,651 @@
+source_file,row_type,year,branch,period,period_type,month_number,sales_amount
+REP_S_00134_SMRY.csv,branch,2025,Stories - Bir Hasan,january,month,1,3355705.33
+REP_S_00134_SMRY.csv,branch,2025,Stories - Bir Hasan,february,month,2,2842993.67
+REP_S_00134_SMRY.csv,branch,2025,Stories - Bir Hasan,march,month,3,2266050.67
+REP_S_00134_SMRY.csv,branch,2025,Stories - Bir Hasan,april,month,4,3459979.67
+REP_S_00134_SMRY.csv,branch,2025,Stories - Bir Hasan,may,month,5,2125379.33
+REP_S_00134_SMRY.csv,branch,2025,Stories - Bir Hasan,june,month,6,744638.33
+REP_S_00134_SMRY.csv,branch,2025,Stories - Bir Hasan,july,month,7,3799740.25
+REP_S_00134_SMRY.csv,branch,2025,Stories - Bir Hasan,august,month,8,3783897.91
+REP_S_00134_SMRY.csv,branch,2025,Stories - Bir Hasan,september,month,9,3255935.75
+REP_S_00134_SMRY.csv,branch,2025,Stories - Bir Hasan,october,month,10,3128528.54
+REP_S_00134_SMRY.csv,branch,2025,Stories - Bir Hasan,november,month,11,2851287.1
+REP_S_00134_SMRY.csv,branch,2025,Stories - Bir Hasan,december,month,12,2743087.7
+REP_S_00134_SMRY.csv,branch,2025,Stories - Bir Hasan,total_by_year,year_total,,34357224.24
+REP_S_00134_SMRY.csv,branch,2025,Stories Ain El Mreisseh,january,month,1,12648546.67
+REP_S_00134_SMRY.csv,branch,2025,Stories Ain El Mreisseh,february,month,2,9929973.33
+REP_S_00134_SMRY.csv,branch,2025,Stories Ain El Mreisseh,march,month,3,9849926.67
+REP_S_00134_SMRY.csv,branch,2025,Stories Ain El Mreisseh,april,month,4,13025923.33
+REP_S_00134_SMRY.csv,branch,2025,Stories Ain El Mreisseh,may,month,5,7208975.0
+REP_S_00134_SMRY.csv,branch,2025,Stories Ain El Mreisseh,june,month,6,2883403.33
+REP_S_00134_SMRY.csv,branch,2025,Stories Ain El Mreisseh,july,month,7,11889329.16
+REP_S_00134_SMRY.csv,branch,2025,Stories Ain El Mreisseh,august,month,8,11610097.92
+REP_S_00134_SMRY.csv,branch,2025,Stories Ain El Mreisseh,september,month,9,11021123.75
+REP_S_00134_SMRY.csv,branch,2025,Stories Ain El Mreisseh,october,month,10,10516783.81
+REP_S_00134_SMRY.csv,branch,2025,Stories Ain El Mreisseh,november,month,11,9387782.61
+REP_S_00134_SMRY.csv,branch,2025,Stories Ain El Mreisseh,december,month,12,9640996.43
+REP_S_00134_SMRY.csv,branch,2025,Stories Ain El Mreisseh,total_by_year,year_total,,119612862.02
+REP_S_00134_SMRY.csv,branch,2025,Stories Airport,january,month,1,0.0
+REP_S_00134_SMRY.csv,branch,2025,Stories Airport,february,month,2,0.0
+REP_S_00134_SMRY.csv,branch,2025,Stories Airport,march,month,3,0.0
+REP_S_00134_SMRY.csv,branch,2025,Stories Airport,april,month,4,0.0
+REP_S_00134_SMRY.csv,branch,2025,Stories Airport,may,month,5,0.0
+REP_S_00134_SMRY.csv,branch,2025,Stories Airport,june,month,6,8428.83
+REP_S_00134_SMRY.csv,branch,2025,Stories Airport,july,month,7,2940003.01
+REP_S_00134_SMRY.csv,branch,2025,Stories Airport,august,month,8,6963426.45
+REP_S_00134_SMRY.csv,branch,2025,Stories Airport,september,month,9,7467197.62
+REP_S_00134_SMRY.csv,branch,2025,Stories Airport,october,month,10,8414672.7
+REP_S_00134_SMRY.csv,branch,2025,Stories Airport,november,month,11,7029720.14
+REP_S_00134_SMRY.csv,branch,2025,Stories Airport,december,month,12,6604828.86
+REP_S_00134_SMRY.csv,branch,2025,Stories Airport,total_by_year,year_total,,39428277.6
+REP_S_00134_SMRY.csv,branch,2025,Stories alay,january,month,1,0.0
+REP_S_00134_SMRY.csv,branch,2025,Stories alay,february,month,2,0.0
+REP_S_00134_SMRY.csv,branch,2025,Stories alay,march,month,3,0.0
+REP_S_00134_SMRY.csv,branch,2025,Stories alay,april,month,4,0.0
+REP_S_00134_SMRY.csv,branch,2025,Stories alay,may,month,5,0.0
+REP_S_00134_SMRY.csv,branch,2025,Stories alay,june,month,6,0.0
+REP_S_00134_SMRY.csv,branch,2025,Stories alay,july,month,7,4219344.76
+REP_S_00134_SMRY.csv,branch,2025,Stories alay,august,month,8,8565845.07
+REP_S_00134_SMRY.csv,branch,2025,Stories alay,september,month,9,5397295.51
+REP_S_00134_SMRY.csv,branch,2025,Stories alay,october,month,10,4503168.48
+REP_S_00134_SMRY.csv,branch,2025,Stories alay,november,month,11,4071091.3
+REP_S_00134_SMRY.csv,branch,2025,Stories alay,december,month,12,3739480.5
+REP_S_00134_SMRY.csv,branch,2025,Stories alay,total_by_year,year_total,,30496225.61
+REP_S_00134_SMRY.csv,branch,2025,Stories amioun,january,month,1,0.0
+REP_S_00134_SMRY.csv,branch,2025,Stories amioun,february,month,2,0.0
+REP_S_00134_SMRY.csv,branch,2025,Stories amioun,march,month,3,0.0
+REP_S_00134_SMRY.csv,branch,2025,Stories amioun,april,month,4,0.0
+REP_S_00134_SMRY.csv,branch,2025,Stories amioun,may,month,5,0.0
+REP_S_00134_SMRY.csv,branch,2025,Stories amioun,june,month,6,0.0
+REP_S_00134_SMRY.csv,branch,2025,Stories amioun,july,month,7,0.0
+REP_S_00134_SMRY.csv,branch,2025,Stories amioun,august,month,8,0.0
+REP_S_00134_SMRY.csv,branch,2025,Stories amioun,september,month,9,0.0
+REP_S_00134_SMRY.csv,branch,2025,Stories amioun,october,month,10,3582319.53
+REP_S_00134_SMRY.csv,branch,2025,Stories amioun,november,month,11,3115747.75
+REP_S_00134_SMRY.csv,branch,2025,Stories amioun,december,month,12,3067997.01
+REP_S_00134_SMRY.csv,branch,2025,Stories amioun,total_by_year,year_total,,9766064.29
+REP_S_00134_SMRY.csv,branch,2025,Stories Antelias,january,month,1,2615854.33
+REP_S_00134_SMRY.csv,branch,2025,Stories Antelias,february,month,2,2139010.67
+REP_S_00134_SMRY.csv,branch,2025,Stories Antelias,march,month,3,3162716.67
+REP_S_00134_SMRY.csv,branch,2025,Stories Antelias,april,month,4,3391741.33
+REP_S_00134_SMRY.csv,branch,2025,Stories Antelias,may,month,5,2033635.67
+REP_S_00134_SMRY.csv,branch,2025,Stories Antelias,june,month,6,728978.33
+REP_S_00134_SMRY.csv,branch,2025,Stories Antelias,july,month,7,2963696.71
+REP_S_00134_SMRY.csv,branch,2025,Stories Antelias,august,month,8,3182363.97
+REP_S_00134_SMRY.csv,branch,2025,Stories Antelias,september,month,9,2909965.47
+REP_S_00134_SMRY.csv,branch,2025,Stories Antelias,october,month,10,2715152.86
+REP_S_00134_SMRY.csv,branch,2025,Stories Antelias,november,month,11,2551353.16
+REP_S_00134_SMRY.csv,branch,2025,Stories Antelias,december,month,12,2234759.77
+REP_S_00134_SMRY.csv,branch,2025,Stories Antelias,total_by_year,year_total,,30629228.94
+REP_S_00134_SMRY.csv,branch,2025,Stories Batroun,january,month,1,4266517.33
+REP_S_00134_SMRY.csv,branch,2025,Stories Batroun,february,month,2,3388117.33
+REP_S_00134_SMRY.csv,branch,2025,Stories Batroun,march,month,3,4890198.33
+REP_S_00134_SMRY.csv,branch,2025,Stories Batroun,april,month,4,5516881.67
+REP_S_00134_SMRY.csv,branch,2025,Stories Batroun,may,month,5,2963980.33
+REP_S_00134_SMRY.csv,branch,2025,Stories Batroun,june,month,6,1311240.0
+REP_S_00134_SMRY.csv,branch,2025,Stories Batroun,july,month,7,6135003.02
+REP_S_00134_SMRY.csv,branch,2025,Stories Batroun,august,month,8,6751770.29
+REP_S_00134_SMRY.csv,branch,2025,Stories Batroun,september,month,9,5041150.76
+REP_S_00134_SMRY.csv,branch,2025,Stories Batroun,october,month,10,4372225.54
+REP_S_00134_SMRY.csv,branch,2025,Stories Batroun,november,month,11,4272667.88
+REP_S_00134_SMRY.csv,branch,2025,Stories Batroun,december,month,12,5163712.03
+REP_S_00134_SMRY.csv,branch,2025,Stories Batroun,total_by_year,year_total,,54073464.51
+REP_S_00134_SMRY.csv,branch,2025,Stories Bayada,january,month,1,4497376.67
+REP_S_00134_SMRY.csv,branch,2025,Stories Bayada,february,month,2,3419106.67
+REP_S_00134_SMRY.csv,branch,2025,Stories Bayada,march,month,3,5083386.67
+REP_S_00134_SMRY.csv,branch,2025,Stories Bayada,april,month,4,5196906.67
+REP_S_00134_SMRY.csv,branch,2025,Stories Bayada,may,month,5,3043400.0
+REP_S_00134_SMRY.csv,branch,2025,Stories Bayada,june,month,6,1208190.0
+REP_S_00134_SMRY.csv,branch,2025,Stories Bayada,july,month,7,5448609.92
+REP_S_00134_SMRY.csv,branch,2025,Stories Bayada,august,month,8,5613038.75
+REP_S_00134_SMRY.csv,branch,2025,Stories Bayada,september,month,9,4917258.26
+REP_S_00134_SMRY.csv,branch,2025,Stories Bayada,october,month,10,5224336.34
+REP_S_00134_SMRY.csv,branch,2025,Stories Bayada,november,month,11,4588470.28
+REP_S_00134_SMRY.csv,branch,2025,Stories Bayada,december,month,12,4403458.27
+REP_S_00134_SMRY.csv,branch,2025,Stories Bayada,total_by_year,year_total,,52643538.48
+REP_S_00134_SMRY.csv,branch,2025,Stories Centro Mall,january,month,1,3264533.33
+REP_S_00134_SMRY.csv,branch,2025,Stories Centro Mall,february,month,2,2944806.67
+REP_S_00134_SMRY.csv,branch,2025,Stories Centro Mall,march,month,3,2218466.67
+REP_S_00134_SMRY.csv,branch,2025,Stories Centro Mall,april,month,4,3937166.67
+REP_S_00134_SMRY.csv,branch,2025,Stories Centro Mall,may,month,5,1955286.67
+REP_S_00134_SMRY.csv,branch,2025,Stories Centro Mall,june,month,6,924383.33
+REP_S_00134_SMRY.csv,branch,2025,Stories Centro Mall,july,month,7,4201339.95
+REP_S_00134_SMRY.csv,branch,2025,Stories Centro Mall,august,month,8,4307333.34
+REP_S_00134_SMRY.csv,branch,2025,Stories Centro Mall,september,month,9,3232537.55
+REP_S_00134_SMRY.csv,branch,2025,Stories Centro Mall,october,month,10,3059645.65
+REP_S_00134_SMRY.csv,branch,2025,Stories Centro Mall,november,month,11,3497554.96
+REP_S_00134_SMRY.csv,branch,2025,Stories Centro Mall,december,month,12,3998663.08
+REP_S_00134_SMRY.csv,branch,2025,Stories Centro Mall,total_by_year,year_total,,37541717.86
+REP_S_00134_SMRY.csv,branch,2025,Stories Event Starco,january,month,1,0.0
+REP_S_00134_SMRY.csv,branch,2025,Stories Event Starco,february,month,2,0.0
+REP_S_00134_SMRY.csv,branch,2025,Stories Event Starco,march,month,3,0.0
+REP_S_00134_SMRY.csv,branch,2025,Stories Event Starco,april,month,4,0.0
+REP_S_00134_SMRY.csv,branch,2025,Stories Event Starco,may,month,5,0.0
+REP_S_00134_SMRY.csv,branch,2025,Stories Event Starco,june,month,6,0.0
+REP_S_00134_SMRY.csv,branch,2025,Stories Event Starco,july,month,7,918.92
+REP_S_00134_SMRY.csv,branch,2025,Stories Event Starco,august,month,8,3141.14
+REP_S_00134_SMRY.csv,branch,2025,Stories Event Starco,september,month,9,0.0
+REP_S_00134_SMRY.csv,branch,2025,Stories Event Starco,october,month,10,0.0
+REP_S_00134_SMRY.csv,branch,2025,Stories Event Starco,november,month,11,6606.61
+REP_S_00134_SMRY.csv,branch,2025,Stories Event Starco,december,month,12,586645.65
+REP_S_00134_SMRY.csv,branch,2025,Stories Event Starco,total_by_year,year_total,,597312.31
+REP_S_00134_SMRY.csv,branch,2025,Stories Faqra,january,month,1,1889910.0
+REP_S_00134_SMRY.csv,branch,2025,Stories Faqra,february,month,2,1829960.0
+REP_S_00134_SMRY.csv,branch,2025,Stories Faqra,march,month,3,1479756.67
+REP_S_00134_SMRY.csv,branch,2025,Stories Faqra,april,month,4,2298003.33
+REP_S_00134_SMRY.csv,branch,2025,Stories Faqra,may,month,5,1109666.67
+REP_S_00134_SMRY.csv,branch,2025,Stories Faqra,june,month,6,352083.33
+REP_S_00134_SMRY.csv,branch,2025,Stories Faqra,july,month,7,482036.04
+REP_S_00134_SMRY.csv,branch,2025,Stories Faqra,august,month,8,1535977.47
+REP_S_00134_SMRY.csv,branch,2025,Stories Faqra,september,month,9,0.0
+REP_S_00134_SMRY.csv,branch,2025,Stories Faqra,october,month,10,0.0
+REP_S_00134_SMRY.csv,branch,2025,Stories Faqra,november,month,11,0.0
+REP_S_00134_SMRY.csv,branch,2025,Stories Faqra,december,month,12,0.0
+REP_S_00134_SMRY.csv,branch,2025,Stories Faqra,total_by_year,year_total,,10977393.51
+REP_S_00134_SMRY.csv,branch,2025,Stories jbeil,january,month,1,0.0
+REP_S_00134_SMRY.csv,branch,2025,Stories jbeil,february,month,2,0.0
+REP_S_00134_SMRY.csv,branch,2025,Stories jbeil,march,month,3,0.0
+REP_S_00134_SMRY.csv,branch,2025,Stories jbeil,april,month,4,0.0
+REP_S_00134_SMRY.csv,branch,2025,Stories jbeil,may,month,5,0.0
+REP_S_00134_SMRY.csv,branch,2025,Stories jbeil,june,month,6,0.0
+REP_S_00134_SMRY.csv,branch,2025,Stories jbeil,july,month,7,0.0
+REP_S_00134_SMRY.csv,branch,2025,Stories jbeil,august,month,8,0.0
+REP_S_00134_SMRY.csv,branch,2025,Stories jbeil,september,month,9,2402935.0
+REP_S_00134_SMRY.csv,branch,2025,Stories jbeil,october,month,10,10218320.22
+REP_S_00134_SMRY.csv,branch,2025,Stories jbeil,november,month,11,7848030.44
+REP_S_00134_SMRY.csv,branch,2025,Stories jbeil,december,month,12,6692888.56
+REP_S_00134_SMRY.csv,branch,2025,Stories jbeil,total_by_year,year_total,,27162174.22
+REP_S_00134_SMRY.csv,branch,2025,Stories kaslik,january,month,1,0.0
+REP_S_00134_SMRY.csv,branch,2025,Stories kaslik,february,month,2,0.0
+REP_S_00134_SMRY.csv,branch,2025,Stories kaslik,march,month,3,0.0
+REP_S_00134_SMRY.csv,branch,2025,Stories kaslik,april,month,4,0.0
+REP_S_00134_SMRY.csv,branch,2025,Stories kaslik,may,month,5,0.0
+REP_S_00134_SMRY.csv,branch,2025,Stories kaslik,june,month,6,0.0
+REP_S_00134_SMRY.csv,branch,2025,Stories kaslik,july,month,7,0.0
+REP_S_00134_SMRY.csv,branch,2025,Stories kaslik,august,month,8,0.0
+REP_S_00134_SMRY.csv,branch,2025,Stories kaslik,september,month,9,0.0
+REP_S_00134_SMRY.csv,branch,2025,Stories kaslik,october,month,10,0.0
+REP_S_00134_SMRY.csv,branch,2025,Stories kaslik,november,month,11,1237539.34
+REP_S_00134_SMRY.csv,branch,2025,Stories kaslik,december,month,12,1583014.42
+REP_S_00134_SMRY.csv,branch,2025,Stories kaslik,total_by_year,year_total,,2820553.76
+REP_S_00134_SMRY.csv,branch,2025,Stories Khaldeh,january,month,1,7468155.33
+REP_S_00134_SMRY.csv,branch,2025,Stories Khaldeh,february,month,2,6108429.33
+REP_S_00134_SMRY.csv,branch,2025,Stories Khaldeh,march,month,3,6420841.0
+REP_S_00134_SMRY.csv,branch,2025,Stories Khaldeh,april,month,4,8455732.0
+REP_S_00134_SMRY.csv,branch,2025,Stories Khaldeh,may,month,5,4487117.67
+REP_S_00134_SMRY.csv,branch,2025,Stories Khaldeh,june,month,6,2262395.0
+REP_S_00134_SMRY.csv,branch,2025,Stories Khaldeh,july,month,7,9464291.92
+REP_S_00134_SMRY.csv,branch,2025,Stories Khaldeh,august,month,8,10661995.53
+REP_S_00134_SMRY.csv,branch,2025,Stories Khaldeh,september,month,9,7859844.17
+REP_S_00134_SMRY.csv,branch,2025,Stories Khaldeh,october,month,10,7348415.03
+REP_S_00134_SMRY.csv,branch,2025,Stories Khaldeh,november,month,11,6744352.33
+REP_S_00134_SMRY.csv,branch,2025,Stories Khaldeh,december,month,12,6874042.67
+REP_S_00134_SMRY.csv,branch,2025,Stories Khaldeh,total_by_year,year_total,,84155611.99
+REP_S_00134_SMRY.csv,branch,2025,Stories LAU,january,month,1,1832006.33
+REP_S_00134_SMRY.csv,branch,2025,Stories LAU,february,month,2,1863050.33
+REP_S_00134_SMRY.csv,branch,2025,Stories LAU,march,month,3,1859610.67
+REP_S_00134_SMRY.csv,branch,2025,Stories LAU,april,month,4,2358631.33
+REP_S_00134_SMRY.csv,branch,2025,Stories LAU,may,month,5,1206958.0
+REP_S_00134_SMRY.csv,branch,2025,Stories LAU,june,month,6,398961.67
+REP_S_00134_SMRY.csv,branch,2025,Stories LAU,july,month,7,1050186.19
+REP_S_00134_SMRY.csv,branch,2025,Stories LAU,august,month,8,1683288.29
+REP_S_00134_SMRY.csv,branch,2025,Stories LAU,september,month,9,627849.85
+REP_S_00134_SMRY.csv,branch,2025,Stories LAU,october,month,10,1369579.58
+REP_S_00134_SMRY.csv,branch,2025,Stories LAU,november,month,11,1173966.97
+REP_S_00134_SMRY.csv,branch,2025,Stories LAU,december,month,12,619603.6
+REP_S_00134_SMRY.csv,branch,2025,Stories LAU,total_by_year,year_total,,16043692.82
+REP_S_00134_SMRY.csv,branch,2025,Stories Le Mall,january,month,1,3881015.0
+REP_S_00134_SMRY.csv,branch,2025,Stories Le Mall,february,month,2,3772586.67
+REP_S_00134_SMRY.csv,branch,2025,Stories Le Mall,march,month,3,4220770.0
+REP_S_00134_SMRY.csv,branch,2025,Stories Le Mall,april,month,4,4428620.0
+REP_S_00134_SMRY.csv,branch,2025,Stories Le Mall,may,month,5,2163876.67
+REP_S_00134_SMRY.csv,branch,2025,Stories Le Mall,june,month,6,967783.33
+REP_S_00134_SMRY.csv,branch,2025,Stories Le Mall,july,month,7,4986426.44
+REP_S_00134_SMRY.csv,branch,2025,Stories Le Mall,august,month,8,5452825.84
+REP_S_00134_SMRY.csv,branch,2025,Stories Le Mall,september,month,9,4201888.9
+REP_S_00134_SMRY.csv,branch,2025,Stories Le Mall,october,month,10,3807124.33
+REP_S_00134_SMRY.csv,branch,2025,Stories Le Mall,november,month,11,3984058.87
+REP_S_00134_SMRY.csv,branch,2025,Stories Le Mall,december,month,12,5003540.55
+REP_S_00134_SMRY.csv,branch,2025,Stories Le Mall,total_by_year,year_total,,46870516.59
+REP_S_00134_SMRY.csv,branch,2025,Stories Mansourieh,january,month,1,0.0
+REP_S_00134_SMRY.csv,branch,2025,Stories Mansourieh,february,month,2,0.0
+REP_S_00134_SMRY.csv,branch,2025,Stories Mansourieh,march,month,3,0.0
+REP_S_00134_SMRY.csv,branch,2025,Stories Mansourieh,april,month,4,0.0
+REP_S_00134_SMRY.csv,branch,2025,Stories Mansourieh,may,month,5,0.0
+REP_S_00134_SMRY.csv,branch,2025,Stories Mansourieh,june,month,6,0.0
+REP_S_00134_SMRY.csv,branch,2025,Stories Mansourieh,july,month,7,193405.41
+REP_S_00134_SMRY.csv,branch,2025,Stories Mansourieh,august,month,8,5928212.63
+REP_S_00134_SMRY.csv,branch,2025,Stories Mansourieh,september,month,9,5813335.75
+REP_S_00134_SMRY.csv,branch,2025,Stories Mansourieh,october,month,10,5978077.49
+REP_S_00134_SMRY.csv,branch,2025,Stories Mansourieh,november,month,11,4888906.92
+REP_S_00134_SMRY.csv,branch,2025,Stories Mansourieh,december,month,12,4198633.64
+REP_S_00134_SMRY.csv,branch,2025,Stories Mansourieh,total_by_year,year_total,,27000571.83
+REP_S_00134_SMRY.csv,branch,2025,Stories Ramlet El Bayda,january,month,1,0.0
+REP_S_00134_SMRY.csv,branch,2025,Stories Ramlet El Bayda,february,month,2,1570806.67
+REP_S_00134_SMRY.csv,branch,2025,Stories Ramlet El Bayda,march,month,3,3588563.33
+REP_S_00134_SMRY.csv,branch,2025,Stories Ramlet El Bayda,april,month,4,6011885.0
+REP_S_00134_SMRY.csv,branch,2025,Stories Ramlet El Bayda,may,month,5,3542743.33
+REP_S_00134_SMRY.csv,branch,2025,Stories Ramlet El Bayda,june,month,6,1445760.0
+REP_S_00134_SMRY.csv,branch,2025,Stories Ramlet El Bayda,july,month,7,7427539.62
+REP_S_00134_SMRY.csv,branch,2025,Stories Ramlet El Bayda,august,month,8,7668109.92
+REP_S_00134_SMRY.csv,branch,2025,Stories Ramlet El Bayda,september,month,9,6585103.32
+REP_S_00134_SMRY.csv,branch,2025,Stories Ramlet El Bayda,october,month,10,6435858.57
+REP_S_00134_SMRY.csv,branch,2025,Stories Ramlet El Bayda,november,month,11,5863675.69
+REP_S_00134_SMRY.csv,branch,2025,Stories Ramlet El Bayda,december,month,12,5944644.46
+REP_S_00134_SMRY.csv,branch,2025,Stories Ramlet El Bayda,total_by_year,year_total,,56084689.92
+REP_S_00134_SMRY.csv,branch,2025,Stories raouche,january,month,1,0.0
+REP_S_00134_SMRY.csv,branch,2025,Stories raouche,february,month,2,0.0
+REP_S_00134_SMRY.csv,branch,2025,Stories raouche,march,month,3,0.0
+REP_S_00134_SMRY.csv,branch,2025,Stories raouche,april,month,4,0.0
+REP_S_00134_SMRY.csv,branch,2025,Stories raouche,may,month,5,0.0
+REP_S_00134_SMRY.csv,branch,2025,Stories raouche,june,month,6,0.0
+REP_S_00134_SMRY.csv,branch,2025,Stories raouche,july,month,7,0.0
+REP_S_00134_SMRY.csv,branch,2025,Stories raouche,august,month,8,0.0
+REP_S_00134_SMRY.csv,branch,2025,Stories raouche,september,month,9,0.0
+REP_S_00134_SMRY.csv,branch,2025,Stories raouche,october,month,10,0.0
+REP_S_00134_SMRY.csv,branch,2025,Stories raouche,november,month,11,1740370.88
+REP_S_00134_SMRY.csv,branch,2025,Stories raouche,december,month,12,2815825.84
+REP_S_00134_SMRY.csv,branch,2025,Stories raouche,total_by_year,year_total,,4556196.71
+REP_S_00134_SMRY.csv,branch,2025,Stories Saida,january,month,1,7263332.33
+REP_S_00134_SMRY.csv,branch,2025,Stories Saida,february,month,2,5121351.33
+REP_S_00134_SMRY.csv,branch,2025,Stories Saida,march,month,3,4684910.67
+REP_S_00134_SMRY.csv,branch,2025,Stories Saida,april,month,4,6361154.33
+REP_S_00134_SMRY.csv,branch,2025,Stories Saida,may,month,5,3010781.67
+REP_S_00134_SMRY.csv,branch,2025,Stories Saida,june,month,6,1323360.0
+REP_S_00134_SMRY.csv,branch,2025,Stories Saida,july,month,7,5939826.44
+REP_S_00134_SMRY.csv,branch,2025,Stories Saida,august,month,8,5925560.98
+REP_S_00134_SMRY.csv,branch,2025,Stories Saida,september,month,9,4245091.9
+REP_S_00134_SMRY.csv,branch,2025,Stories Saida,october,month,10,3639435.44
+REP_S_00134_SMRY.csv,branch,2025,Stories Saida,november,month,11,3665840.85
+REP_S_00134_SMRY.csv,branch,2025,Stories Saida,december,month,12,3825643.86
+REP_S_00134_SMRY.csv,branch,2025,Stories Saida,total_by_year,year_total,,55006289.81
+REP_S_00134_SMRY.csv,branch,2025,Stories sin el fil,january,month,1,0.0
+REP_S_00134_SMRY.csv,branch,2025,Stories sin el fil,february,month,2,0.0
+REP_S_00134_SMRY.csv,branch,2025,Stories sin el fil,march,month,3,0.0
+REP_S_00134_SMRY.csv,branch,2025,Stories sin el fil,april,month,4,0.0
+REP_S_00134_SMRY.csv,branch,2025,Stories sin el fil,may,month,5,0.0
+REP_S_00134_SMRY.csv,branch,2025,Stories sin el fil,june,month,6,0.0
+REP_S_00134_SMRY.csv,branch,2025,Stories sin el fil,july,month,7,0.0
+REP_S_00134_SMRY.csv,branch,2025,Stories sin el fil,august,month,8,0.0
+REP_S_00134_SMRY.csv,branch,2025,Stories sin el fil,september,month,9,0.0
+REP_S_00134_SMRY.csv,branch,2025,Stories sin el fil,october,month,10,2624897.9
+REP_S_00134_SMRY.csv,branch,2025,Stories sin el fil,november,month,11,4122138.15
+REP_S_00134_SMRY.csv,branch,2025,Stories sin el fil,december,month,12,3551489.5
+REP_S_00134_SMRY.csv,branch,2025,Stories sin el fil,total_by_year,year_total,,10298525.55
+REP_S_00134_SMRY.csv,branch,2025,Stories Sour 2,january,month,1,0.0
+REP_S_00134_SMRY.csv,branch,2025,Stories Sour 2,february,month,2,0.0
+REP_S_00134_SMRY.csv,branch,2025,Stories Sour 2,march,month,3,0.0
+REP_S_00134_SMRY.csv,branch,2025,Stories Sour 2,april,month,4,0.0
+REP_S_00134_SMRY.csv,branch,2025,Stories Sour 2,may,month,5,0.0
+REP_S_00134_SMRY.csv,branch,2025,Stories Sour 2,june,month,6,0.0
+REP_S_00134_SMRY.csv,branch,2025,Stories Sour 2,july,month,7,4504179.49
+REP_S_00134_SMRY.csv,branch,2025,Stories Sour 2,august,month,8,5532578.53
+REP_S_00134_SMRY.csv,branch,2025,Stories Sour 2,september,month,9,3970129.99
+REP_S_00134_SMRY.csv,branch,2025,Stories Sour 2,october,month,10,3313013.33
+REP_S_00134_SMRY.csv,branch,2025,Stories Sour 2,november,month,11,2948339.91
+REP_S_00134_SMRY.csv,branch,2025,Stories Sour 2,december,month,12,3173568.29
+REP_S_00134_SMRY.csv,branch,2025,Stories Sour 2,total_by_year,year_total,,23441809.54
+REP_S_00134_SMRY.csv,branch,2025,Stories Verdun,january,month,1,1747977.87
+REP_S_00134_SMRY.csv,branch,2025,Stories Verdun,february,month,2,1387090.33
+REP_S_00134_SMRY.csv,branch,2025,Stories Verdun,march,month,3,1436257.67
+REP_S_00134_SMRY.csv,branch,2025,Stories Verdun,april,month,4,2105139.33
+REP_S_00134_SMRY.csv,branch,2025,Stories Verdun,may,month,5,1195236.33
+REP_S_00134_SMRY.csv,branch,2025,Stories Verdun,june,month,6,449746.67
+REP_S_00134_SMRY.csv,branch,2025,Stories Verdun,july,month,7,3417793.41
+REP_S_00134_SMRY.csv,branch,2025,Stories Verdun,august,month,8,3481408.42
+REP_S_00134_SMRY.csv,branch,2025,Stories Verdun,september,month,9,2989974.79
+REP_S_00134_SMRY.csv,branch,2025,Stories Verdun,october,month,10,2764180.79
+REP_S_00134_SMRY.csv,branch,2025,Stories Verdun,november,month,11,2465933.34
+REP_S_00134_SMRY.csv,branch,2025,Stories Verdun,december,month,12,1695655.86
+REP_S_00134_SMRY.csv,branch,2025,Stories Verdun,total_by_year,year_total,,25136394.81
+REP_S_00134_SMRY.csv,branch,2025,Stories Zalka,january,month,1,10449006.67
+REP_S_00134_SMRY.csv,branch,2025,Stories Zalka,february,month,2,8417640.0
+REP_S_00134_SMRY.csv,branch,2025,Stories Zalka,march,month,3,10840106.67
+REP_S_00134_SMRY.csv,branch,2025,Stories Zalka,april,month,4,11182530.0
+REP_S_00134_SMRY.csv,branch,2025,Stories Zalka,may,month,5,6433973.33
+REP_S_00134_SMRY.csv,branch,2025,Stories Zalka,june,month,6,2504900.0
+REP_S_00134_SMRY.csv,branch,2025,Stories Zalka,july,month,7,10265530.04
+REP_S_00134_SMRY.csv,branch,2025,Stories Zalka,august,month,8,10774439.35
+REP_S_00134_SMRY.csv,branch,2025,Stories Zalka,september,month,9,9882169.98
+REP_S_00134_SMRY.csv,branch,2025,Stories Zalka,october,month,10,9775939.95
+REP_S_00134_SMRY.csv,branch,2025,Stories Zalka,november,month,11,8876666.37
+REP_S_00134_SMRY.csv,branch,2025,Stories Zalka,december,month,12,8566291.9
+REP_S_00134_SMRY.csv,branch,2025,Stories Zalka,total_by_year,year_total,,107969194.27
+REP_S_00134_SMRY.csv,branch,2025,Stories.,january,month,1,2190006.67
+REP_S_00134_SMRY.csv,branch,2025,Stories.,february,month,2,2527096.67
+REP_S_00134_SMRY.csv,branch,2025,Stories.,march,month,3,2385366.67
+REP_S_00134_SMRY.csv,branch,2025,Stories.,april,month,4,3555273.33
+REP_S_00134_SMRY.csv,branch,2025,Stories.,may,month,5,2024430.0
+REP_S_00134_SMRY.csv,branch,2025,Stories.,june,month,6,923133.33
+REP_S_00134_SMRY.csv,branch,2025,Stories.,july,month,7,300556.67
+REP_S_00134_SMRY.csv,branch,2025,Stories.,august,month,8,0.0
+REP_S_00134_SMRY.csv,branch,2025,Stories.,september,month,9,0.0
+REP_S_00134_SMRY.csv,branch,2025,Stories.,october,month,10,0.0
+REP_S_00134_SMRY.csv,branch,2025,Stories.,november,month,11,0.0
+REP_S_00134_SMRY.csv,branch,2025,Stories.,december,month,12,0.0
+REP_S_00134_SMRY.csv,branch,2025,Stories.,total_by_year,year_total,,13905863.33
+REP_S_00134_SMRY.csv,grand_total,2025,Total,january,month,1,67369943.87
+REP_S_00134_SMRY.csv,grand_total,2025,Total,february,month,2,57262019.67
+REP_S_00134_SMRY.csv,grand_total,2025,Total,march,month,3,64386929.0
+REP_S_00134_SMRY.csv,grand_total,2025,Total,april,month,4,81285568.0
+REP_S_00134_SMRY.csv,grand_total,2025,Total,may,month,5,44505440.67
+REP_S_00134_SMRY.csv,grand_total,2025,Total,june,month,6,18437385.5
+REP_S_00134_SMRY.csv,grand_total,2025,Total,july,month,7,89629757.34
+REP_S_00134_SMRY.csv,grand_total,2025,Total,august,month,8,109425311.8
+REP_S_00134_SMRY.csv,grand_total,2025,Total,september,month,9,91820788.32
+REP_S_00134_SMRY.csv,grand_total,2025,Total,october,month,10,102791676.1
+REP_S_00134_SMRY.csv,grand_total,2025,Total,november,month,11,96932101.85
+REP_S_00134_SMRY.csv,grand_total,2025,Total,december,month,12,96728472.42
+REP_S_00134_SMRY.csv,grand_total,2025,Total,total_by_year,year_total,,920575394.53
+REP_S_00134_SMRY.csv,branch,2026,Stories - Bir Hasan,january,month,1,1792619.23
+REP_S_00134_SMRY.csv,branch,2026,Stories - Bir Hasan,february,month,2,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories - Bir Hasan,march,month,3,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories - Bir Hasan,april,month,4,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories - Bir Hasan,may,month,5,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories - Bir Hasan,june,month,6,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories - Bir Hasan,july,month,7,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories - Bir Hasan,august,month,8,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories - Bir Hasan,september,month,9,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories - Bir Hasan,october,month,10,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories - Bir Hasan,november,month,11,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories - Bir Hasan,december,month,12,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories - Bir Hasan,total_by_year,year_total,,1792619.23
+REP_S_00134_SMRY.csv,branch,2026,Stories Ain El Mreisseh,january,month,1,6348294.91
+REP_S_00134_SMRY.csv,branch,2026,Stories Ain El Mreisseh,february,month,2,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories Ain El Mreisseh,march,month,3,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories Ain El Mreisseh,april,month,4,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories Ain El Mreisseh,may,month,5,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories Ain El Mreisseh,june,month,6,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories Ain El Mreisseh,july,month,7,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories Ain El Mreisseh,august,month,8,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories Ain El Mreisseh,september,month,9,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories Ain El Mreisseh,october,month,10,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories Ain El Mreisseh,november,month,11,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories Ain El Mreisseh,december,month,12,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories Ain El Mreisseh,total_by_year,year_total,,6348294.91
+REP_S_00134_SMRY.csv,branch,2026,Stories Airport,january,month,1,4684588.61
+REP_S_00134_SMRY.csv,branch,2026,Stories Airport,february,month,2,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories Airport,march,month,3,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories Airport,april,month,4,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories Airport,may,month,5,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories Airport,june,month,6,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories Airport,july,month,7,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories Airport,august,month,8,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories Airport,september,month,9,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories Airport,october,month,10,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories Airport,november,month,11,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories Airport,december,month,12,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories Airport,total_by_year,year_total,,4684588.61
+REP_S_00134_SMRY.csv,branch,2026,Stories alay,january,month,1,2173788.6
+REP_S_00134_SMRY.csv,branch,2026,Stories alay,february,month,2,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories alay,march,month,3,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories alay,april,month,4,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories alay,may,month,5,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories alay,june,month,6,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories alay,july,month,7,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories alay,august,month,8,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories alay,september,month,9,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories alay,october,month,10,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories alay,november,month,11,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories alay,december,month,12,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories alay,total_by_year,year_total,,2173788.6
+REP_S_00134_SMRY.csv,branch,2026,Stories amioun,january,month,1,1993321.33
+REP_S_00134_SMRY.csv,branch,2026,Stories amioun,february,month,2,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories amioun,march,month,3,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories amioun,april,month,4,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories amioun,may,month,5,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories amioun,june,month,6,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories amioun,july,month,7,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories amioun,august,month,8,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories amioun,september,month,9,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories amioun,october,month,10,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories amioun,november,month,11,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories amioun,december,month,12,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories amioun,total_by_year,year_total,,1993321.33
+REP_S_00134_SMRY.csv,branch,2026,Stories Antelias,january,month,1,1429394.6
+REP_S_00134_SMRY.csv,branch,2026,Stories Antelias,february,month,2,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories Antelias,march,month,3,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories Antelias,april,month,4,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories Antelias,may,month,5,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories Antelias,june,month,6,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories Antelias,july,month,7,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories Antelias,august,month,8,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories Antelias,september,month,9,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories Antelias,october,month,10,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories Antelias,november,month,11,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories Antelias,december,month,12,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories Antelias,total_by_year,year_total,,1429394.6
+REP_S_00134_SMRY.csv,branch,2026,Stories Batroun,january,month,1,2839402.11
+REP_S_00134_SMRY.csv,branch,2026,Stories Batroun,february,month,2,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories Batroun,march,month,3,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories Batroun,april,month,4,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories Batroun,may,month,5,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories Batroun,june,month,6,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories Batroun,july,month,7,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories Batroun,august,month,8,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories Batroun,september,month,9,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories Batroun,october,month,10,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories Batroun,november,month,11,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories Batroun,december,month,12,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories Batroun,total_by_year,year_total,,2839402.11
+REP_S_00134_SMRY.csv,branch,2026,Stories Bayada,january,month,1,2688382.59
+REP_S_00134_SMRY.csv,branch,2026,Stories Bayada,february,month,2,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories Bayada,march,month,3,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories Bayada,april,month,4,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories Bayada,may,month,5,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories Bayada,june,month,6,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories Bayada,july,month,7,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories Bayada,august,month,8,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories Bayada,september,month,9,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories Bayada,october,month,10,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories Bayada,november,month,11,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories Bayada,december,month,12,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories Bayada,total_by_year,year_total,,2688382.59
+REP_S_00134_SMRY.csv,branch,2026,Stories Centro Mall,january,month,1,2236126.13
+REP_S_00134_SMRY.csv,branch,2026,Stories Centro Mall,february,month,2,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories Centro Mall,march,month,3,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories Centro Mall,april,month,4,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories Centro Mall,may,month,5,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories Centro Mall,june,month,6,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories Centro Mall,july,month,7,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories Centro Mall,august,month,8,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories Centro Mall,september,month,9,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories Centro Mall,october,month,10,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories Centro Mall,november,month,11,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories Centro Mall,december,month,12,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories Centro Mall,total_by_year,year_total,,2236126.13
+REP_S_00134_SMRY.csv,branch,2026,Stories Event Starco,january,month,1,37549.55
+REP_S_00134_SMRY.csv,branch,2026,Stories Event Starco,february,month,2,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories Event Starco,march,month,3,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories Event Starco,april,month,4,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories Event Starco,may,month,5,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories Event Starco,june,month,6,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories Event Starco,july,month,7,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories Event Starco,august,month,8,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories Event Starco,september,month,9,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories Event Starco,october,month,10,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories Event Starco,november,month,11,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories Event Starco,december,month,12,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories Event Starco,total_by_year,year_total,,37549.55
+REP_S_00134_SMRY.csv,branch,2026,Stories jbeil,january,month,1,4189610.42
+REP_S_00134_SMRY.csv,branch,2026,Stories jbeil,february,month,2,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories jbeil,march,month,3,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories jbeil,april,month,4,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories jbeil,may,month,5,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories jbeil,june,month,6,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories jbeil,july,month,7,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories jbeil,august,month,8,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories jbeil,september,month,9,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories jbeil,october,month,10,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories jbeil,november,month,11,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories jbeil,december,month,12,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories jbeil,total_by_year,year_total,,4189610.42
+REP_S_00134_SMRY.csv,branch,2026,Stories kaslik,january,month,1,1034753.16
+REP_S_00134_SMRY.csv,branch,2026,Stories kaslik,february,month,2,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories kaslik,march,month,3,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories kaslik,april,month,4,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories kaslik,may,month,5,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories kaslik,june,month,6,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories kaslik,july,month,7,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories kaslik,august,month,8,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories kaslik,september,month,9,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories kaslik,october,month,10,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories kaslik,november,month,11,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories kaslik,december,month,12,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories kaslik,total_by_year,year_total,,1034753.16
+REP_S_00134_SMRY.csv,branch,2026,Stories Khaldeh,january,month,1,4657413.53
+REP_S_00134_SMRY.csv,branch,2026,Stories Khaldeh,february,month,2,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories Khaldeh,march,month,3,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories Khaldeh,april,month,4,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories Khaldeh,may,month,5,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories Khaldeh,june,month,6,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories Khaldeh,july,month,7,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories Khaldeh,august,month,8,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories Khaldeh,september,month,9,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories Khaldeh,october,month,10,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories Khaldeh,november,month,11,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories Khaldeh,december,month,12,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories Khaldeh,total_by_year,year_total,,4657413.53
+REP_S_00134_SMRY.csv,branch,2026,Stories LAU,january,month,1,735243.25
+REP_S_00134_SMRY.csv,branch,2026,Stories LAU,february,month,2,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories LAU,march,month,3,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories LAU,april,month,4,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories LAU,may,month,5,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories LAU,june,month,6,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories LAU,july,month,7,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories LAU,august,month,8,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories LAU,september,month,9,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories LAU,october,month,10,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories LAU,november,month,11,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories LAU,december,month,12,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories LAU,total_by_year,year_total,,735243.25
+REP_S_00134_SMRY.csv,branch,2026,Stories Le Mall,january,month,1,2941828.23
+REP_S_00134_SMRY.csv,branch,2026,Stories Le Mall,february,month,2,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories Le Mall,march,month,3,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories Le Mall,april,month,4,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories Le Mall,may,month,5,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories Le Mall,june,month,6,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories Le Mall,july,month,7,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories Le Mall,august,month,8,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories Le Mall,september,month,9,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories Le Mall,october,month,10,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories Le Mall,november,month,11,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories Le Mall,december,month,12,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories Le Mall,total_by_year,year_total,,2941828.23
+REP_S_00134_SMRY.csv,branch,2026,Stories Mansourieh,january,month,1,2786703.91
+REP_S_00134_SMRY.csv,branch,2026,Stories Mansourieh,february,month,2,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories Mansourieh,march,month,3,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories Mansourieh,april,month,4,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories Mansourieh,may,month,5,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories Mansourieh,june,month,6,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories Mansourieh,july,month,7,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories Mansourieh,august,month,8,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories Mansourieh,september,month,9,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories Mansourieh,october,month,10,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories Mansourieh,november,month,11,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories Mansourieh,december,month,12,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories Mansourieh,total_by_year,year_total,,2786703.91
+REP_S_00134_SMRY.csv,branch,2026,Stories Ramlet El Bayda,january,month,1,3913985.6
+REP_S_00134_SMRY.csv,branch,2026,Stories Ramlet El Bayda,february,month,2,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories Ramlet El Bayda,march,month,3,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories Ramlet El Bayda,april,month,4,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories Ramlet El Bayda,may,month,5,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories Ramlet El Bayda,june,month,6,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories Ramlet El Bayda,july,month,7,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories Ramlet El Bayda,august,month,8,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories Ramlet El Bayda,september,month,9,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories Ramlet El Bayda,october,month,10,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories Ramlet El Bayda,november,month,11,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories Ramlet El Bayda,december,month,12,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories Ramlet El Bayda,total_by_year,year_total,,3913985.6
+REP_S_00134_SMRY.csv,branch,2026,Stories raouche,january,month,1,1896890.4
+REP_S_00134_SMRY.csv,branch,2026,Stories raouche,february,month,2,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories raouche,march,month,3,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories raouche,april,month,4,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories raouche,may,month,5,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories raouche,june,month,6,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories raouche,july,month,7,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories raouche,august,month,8,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories raouche,september,month,9,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories raouche,october,month,10,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories raouche,november,month,11,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories raouche,december,month,12,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories raouche,total_by_year,year_total,,1896890.4
+REP_S_00134_SMRY.csv,branch,2026,Stories Saida,january,month,1,2433043.85
+REP_S_00134_SMRY.csv,branch,2026,Stories Saida,february,month,2,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories Saida,march,month,3,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories Saida,april,month,4,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories Saida,may,month,5,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories Saida,june,month,6,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories Saida,july,month,7,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories Saida,august,month,8,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories Saida,september,month,9,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories Saida,october,month,10,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories Saida,november,month,11,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories Saida,december,month,12,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories Saida,total_by_year,year_total,,2433043.85
+REP_S_00134_SMRY.csv,branch,2026,Stories sin el fil,january,month,1,2455657.06
+REP_S_00134_SMRY.csv,branch,2026,Stories sin el fil,february,month,2,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories sin el fil,march,month,3,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories sin el fil,april,month,4,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories sin el fil,may,month,5,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories sin el fil,june,month,6,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories sin el fil,july,month,7,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories sin el fil,august,month,8,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories sin el fil,september,month,9,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories sin el fil,october,month,10,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories sin el fil,november,month,11,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories sin el fil,december,month,12,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories sin el fil,total_by_year,year_total,,2455657.06
+REP_S_00134_SMRY.csv,branch,2026,Stories Sour 2,january,month,1,2434786.67
+REP_S_00134_SMRY.csv,branch,2026,Stories Sour 2,february,month,2,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories Sour 2,march,month,3,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories Sour 2,april,month,4,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories Sour 2,may,month,5,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories Sour 2,june,month,6,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories Sour 2,july,month,7,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories Sour 2,august,month,8,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories Sour 2,september,month,9,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories Sour 2,october,month,10,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories Sour 2,november,month,11,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories Sour 2,december,month,12,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories Sour 2,total_by_year,year_total,,2434786.67
+REP_S_00134_SMRY.csv,branch,2026,Stories Verdun,january,month,1,1069784.99
+REP_S_00134_SMRY.csv,branch,2026,Stories Verdun,february,month,2,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories Verdun,march,month,3,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories Verdun,april,month,4,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories Verdun,may,month,5,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories Verdun,june,month,6,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories Verdun,july,month,7,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories Verdun,august,month,8,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories Verdun,september,month,9,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories Verdun,october,month,10,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories Verdun,november,month,11,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories Verdun,december,month,12,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories Verdun,total_by_year,year_total,,1069784.99
+REP_S_00134_SMRY.csv,branch,2026,Stories Zalka,january,month,1,5752503.31
+REP_S_00134_SMRY.csv,branch,2026,Stories Zalka,february,month,2,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories Zalka,march,month,3,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories Zalka,april,month,4,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories Zalka,may,month,5,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories Zalka,june,month,6,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories Zalka,july,month,7,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories Zalka,august,month,8,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories Zalka,september,month,9,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories Zalka,october,month,10,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories Zalka,november,month,11,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories Zalka,december,month,12,0.0
+REP_S_00134_SMRY.csv,branch,2026,Stories Zalka,total_by_year,year_total,,5752503.31
+REP_S_00134_SMRY.csv,grand_total,2026,Total,january,month,1,62525672.03
+REP_S_00134_SMRY.csv,grand_total,2026,Total,february,month,2,0.0
+REP_S_00134_SMRY.csv,grand_total,2026,Total,march,month,3,0.0
+REP_S_00134_SMRY.csv,grand_total,2026,Total,april,month,4,0.0
+REP_S_00134_SMRY.csv,grand_total,2026,Total,may,month,5,0.0
+REP_S_00134_SMRY.csv,grand_total,2026,Total,june,month,6,0.0
+REP_S_00134_SMRY.csv,grand_total,2026,Total,july,month,7,0.0
+REP_S_00134_SMRY.csv,grand_total,2026,Total,august,month,8,0.0
+REP_S_00134_SMRY.csv,grand_total,2026,Total,september,month,9,0.0
+REP_S_00134_SMRY.csv,grand_total,2026,Total,october,month,10,0.0
+REP_S_00134_SMRY.csv,grand_total,2026,Total,november,month,11,0.0
+REP_S_00134_SMRY.csv,grand_total,2026,Total,december,month,12,0.0
+REP_S_00134_SMRY.csv,grand_total,2026,Total,total_by_year,year_total,,62525672.03

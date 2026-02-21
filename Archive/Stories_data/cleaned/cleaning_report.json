@@ -1,0 +1,104 @@
+{
+  "input_files": {
+    "rep_00014": "/Users/mohamad22/Desktop/EECE_490_hackathon/Archive/Stories_data/rep_s_00014_SMRY.csv",
+    "rep_00134": "/Users/mohamad22/Desktop/EECE_490_hackathon/Archive/Stories_data/REP_S_00134_SMRY.csv",
+    "rep_00191": "/Users/mohamad22/Desktop/EECE_490_hackathon/Archive/Stories_data/rep_s_00191_SMRY-3.csv",
+    "rep_00673": "/Users/mohamad22/Desktop/EECE_490_hackathon/Archive/Stories_data/rep_s_00673_SMRY.csv"
+  },
+  "output_files": {
+    "rep_00014": "/Users/mohamad22/Desktop/EECE_490_hackathon/Archive/Stories_data/cleaned/rep_00014_theoretical_profit_by_item_clean.csv",
+    "rep_00191": "/Users/mohamad22/Desktop/EECE_490_hackathon/Archive/Stories_data/cleaned/rep_00191_sales_by_items_by_group_clean.csv",
+    "rep_00673": "/Users/mohamad22/Desktop/EECE_490_hackathon/Archive/Stories_data/cleaned/rep_00673_theoretical_profit_by_category_clean.csv",
+    "rep_00134_wide": "/Users/mohamad22/Desktop/EECE_490_hackathon/Archive/Stories_data/cleaned/rep_00134_comparative_monthly_sales_clean_wide.csv",
+    "rep_00134_long": "/Users/mohamad22/Desktop/EECE_490_hackathon/Archive/Stories_data/cleaned/rep_00134_comparative_monthly_sales_clean_long.csv"
+  },
+  "row_counts": {
+    "rep_00014_raw_rows": 14585,
+    "rep_00191_raw_rows": 14140,
+    "rep_00673_raw_rows": 109,
+    "rep_00134_raw_rows": 112,
+    "rep_00014_clean_rows": 13143,
+    "rep_00191_clean_rows": 12261,
+    "rep_00673_clean_rows": 75,
+    "rep_00134_wide_clean_rows": 50,
+    "rep_00134_long_clean_rows": 650
+  },
+  "row_type_counts": {
+    "rep_00014": {
+      "branch_total": 25,
+      "category_total": 80,
+      "department_total": 42,
+      "division_total": 474,
+      "item": 12522
+    },
+    "rep_00191": {
+      "branch_total": 25,
+      "division_total": 402,
+      "group_total": 721,
+      "item": 11113
+    },
+    "rep_00673": {
+      "branch_total": 25,
+      "category": 50
+    },
+    "rep_00134_wide": {
+      "branch": 48,
+      "grand_total": 2
+    }
+  },
+  "quality_checks": {
+    "rep_00673_branch_total_mismatches": [
+      {
+        "branch": "Stories Faqra",
+        "metric": "total_price",
+        "branch_total": 1091839.75,
+        "category_sum": 4871452.34,
+        "difference": -3779612.59
+      },
+      {
+        "branch": "Stories.",
+        "metric": "total_price",
+        "branch_total": 1413464.67,
+        "category_sum": 7093697.67,
+        "difference": -5680233.0
+      },
+      {
+        "branch": "Stories Ain El Mreisseh",
+        "metric": "total_price",
+        "branch_total": 1085981.77,
+        "category_sum": 10859817.75,
+        "difference": -9773835.98
+      },
+      {
+        "branch": "Stories Zalka",
+        "metric": "total_price",
+        "branch_total": 983324.93,
+        "category_sum": 9833249.29,
+        "difference": -8849924.36
+      },
+      {
+        "branch": "Stories Khaldeh",
+        "metric": "total_price",
+        "branch_total": 755778.29,
+        "category_sum": 7557782.9,
+        "difference": -6802004.61
+      },
+      {
+        "branch": "Stories sin el fil",
+        "metric": "total_price",
+        "branch_total": 1029167.87,
+        "category_sum": 10291678.7,
+        "difference": -9262510.83
+      },
+      {
+        "branch": "Stories amioun",
+        "metric": "total_price",
+        "branch_total": 974742.76,
+        "category_sum": 9747427.65,
+        "difference": -8772684.89
+      }
+    ],
+    "rep_00134_total_by_year_mismatches": [],
+    "rep_00134_merge_conflicts": []
+  }
+}
