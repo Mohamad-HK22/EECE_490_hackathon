@@ -1,4 +1,4 @@
-const BASE = process.env.REACT_APP_API_URL || '';
+const BASE = "https://eece-490-hackathon-jd2g.onrender.com";
 
 async function apiFetch(path, options = {}) {
   const res = await fetch(`${BASE}${path}`, options);
