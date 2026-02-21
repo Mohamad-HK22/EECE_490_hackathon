@@ -1,0 +1,227 @@
+[
+  {
+    "branch": "Stories - Bir Hasan",
+    "cluster": 3,
+    "actual_margin": 74.406,
+    "margin_gap": 1.104,
+    "gap_lbp": 342832.0,
+    "total_revenue": 31063518.0,
+    "total_profit": 23113027.0
+  },
+  {
+    "branch": "Stories Ain El Mreisseh",
+    "cluster": 0,
+    "actual_margin": 74.443,
+    "margin_gap": 1.066,
+    "gap_lbp": 1158099.0,
+    "total_revenue": 108599377.0,
+    "total_profit": 80844577.0
+  },
+  {
+    "branch": "Stories Airport",
+    "cluster": 0,
+    "actual_margin": 74.499,
+    "margin_gap": 1.01,
+    "gap_lbp": 368424.0,
+    "total_revenue": 36466500.0,
+    "total_profit": 27167191.0
+  },
+  {
+    "branch": "Stories Antelias",
+    "cluster": 0,
+    "actual_margin": 74.536,
+    "margin_gap": 0.974,
+    "gap_lbp": 277966.0,
+    "total_revenue": 28550488.0,
+    "total_profit": 21280320.0
+  },
+  {
+    "branch": "Stories Batroun",
+    "cluster": 0,
+    "actual_margin": 73.939,
+    "margin_gap": 1.57,
+    "gap_lbp": 765093.0,
+    "total_revenue": 48717388.0,
+    "total_profit": 36021086.0
+  },
+  {
+    "branch": "Stories Bayada",
+    "cluster": 0,
+    "actual_margin": 74.632,
+    "margin_gap": 0.878,
+    "gap_lbp": 420535.0,
+    "total_revenue": 47911075.0,
+    "total_profit": 35756803.0
+  },
+  {
+    "branch": "Stories Centro Mall",
+    "cluster": 0,
+    "actual_margin": 75.277,
+    "margin_gap": 0.232,
+    "gap_lbp": 77993.0,
+    "total_revenue": 33621384.0,
+    "total_profit": 25309294.0
+  },
+  {
+    "branch": "Stories Event Starco",
+    "cluster": 0,
+    "actual_margin": 77.796,
+    "margin_gap": 0.0,
+    "gap_lbp": 0.0,
+    "total_revenue": 597132.0,
+    "total_profit": 464547.0
+  },
+  {
+    "branch": "Stories Faqra",
+    "cluster": 0,
+    "actual_margin": 77.312,
+    "margin_gap": 0.0,
+    "gap_lbp": 0.0,
+    "total_revenue": 10918397.0,
+    "total_profit": 8441218.0
+  },
+  {
+    "branch": "Stories Khaldeh",
+    "cluster": 0,
+    "actual_margin": 73.763,
+    "margin_gap": 1.746,
+    "gap_lbp": 1319820.0,
+    "total_revenue": 75577829.0,
+    "total_profit": 55748502.0
+  },
+  {
+    "branch": "Stories LAU",
+    "cluster": 0,
+    "actual_margin": 74.639,
+    "margin_gap": 0.87,
+    "gap_lbp": 134369.0,
+    "total_revenue": 15447179.0,
+    "total_profit": 11529694.0
+  },
+  {
+    "branch": "Stories Le Mall",
+    "cluster": 0,
+    "actual_margin": 75.022,
+    "margin_gap": 0.488,
+    "gap_lbp": 207262.0,
+    "total_revenue": 42491805.0,
+    "total_profit": 31878021.0
+  },
+  {
+    "branch": "Stories Mansourieh",
+    "cluster": 0,
+    "actual_margin": 74.318,
+    "margin_gap": 1.192,
+    "gap_lbp": 318614.0,
+    "total_revenue": 26738854.0,
+    "total_profit": 19871719.0
+  },
+  {
+    "branch": "Stories Ramlet El Bayda",
+    "cluster": 3,
+    "actual_margin": 74.757,
+    "margin_gap": 0.752,
+    "gap_lbp": 375302.0,
+    "total_revenue": 49889671.0,
+    "total_profit": 37296060.0
+  },
+  {
+    "branch": "Stories Saida",
+    "cluster": 0,
+    "actual_margin": 74.392,
+    "margin_gap": 1.117,
+    "gap_lbp": 554716.0,
+    "total_revenue": 49646630.0,
+    "total_profit": 36933128.0
+  },
+  {
+    "branch": "Stories Sour 2",
+    "cluster": 0,
+    "actual_margin": 76.61,
+    "margin_gap": 0.0,
+    "gap_lbp": 0.0,
+    "total_revenue": 18856486.0,
+    "total_profit": 14446001.0
+  },
+  {
+    "branch": "Stories Verdun",
+    "cluster": 0,
+    "actual_margin": 76.374,
+    "margin_gap": 0.0,
+    "gap_lbp": 0.0,
+    "total_revenue": 22162078.0,
+    "total_profit": 16926158.0
+  },
+  {
+    "branch": "Stories Zalka",
+    "cluster": 0,
+    "actual_margin": 74.088,
+    "margin_gap": 1.422,
+    "gap_lbp": 1397968.0,
+    "total_revenue": 98332493.0,
+    "total_profit": 72852252.0
+  },
+  {
+    "branch": "Stories alay",
+    "cluster": 0,
+    "actual_margin": 73.958,
+    "margin_gap": 1.551,
+    "gap_lbp": 406432.0,
+    "total_revenue": 26205995.0,
+    "total_profit": 19381542.0
+  },
+  {
+    "branch": "Stories amioun",
+    "cluster": 3,
+    "actual_margin": 73.65,
+    "margin_gap": 1.859,
+    "gap_lbp": 181253.0,
+    "total_revenue": 9747788.0,
+    "total_profit": 7179238.0
+  },
+  {
+    "branch": "Stories jbeil",
+    "cluster": 2,
+    "actual_margin": 75.509,
+    "margin_gap": 0.0,
+    "gap_lbp": 0.0,
+    "total_revenue": 27118500.0,
+    "total_profit": 20477001.0
+  },
+  {
+    "branch": "Stories kaslik",
+    "cluster": 0,
+    "actual_margin": 73.295,
+    "margin_gap": 2.214,
+    "gap_lbp": 62420.0,
+    "total_revenue": 2819448.0,
+    "total_profit": 2066527.0
+  },
+  {
+    "branch": "Stories raouche",
+    "cluster": 1,
+    "actual_margin": 74.121,
+    "margin_gap": 1.389,
+    "gap_lbp": 63244.0,
+    "total_revenue": 4553800.0,
+    "total_profit": 3375301.0
+  },
+  {
+    "branch": "Stories sin el fil",
+    "cluster": 3,
+    "actual_margin": 72.474,
+    "margin_gap": 3.035,
+    "gap_lbp": 312358.0,
+    "total_revenue": 10291679.0,
+    "total_profit": 7458821.0
+  },
+  {
+    "branch": "Stories.",
+    "cluster": 0,
+    "actual_margin": 73.982,
+    "margin_gap": 1.527,
+    "gap_lbp": 215818.0,
+    "total_revenue": 14134647.0,
+    "total_profit": 10457160.0
+  }
+]

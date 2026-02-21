@@ -1,0 +1,30 @@
+[
+  {
+    "cluster": 0,
+    "n_branches": 19,
+    "avg_margin": 74.888,
+    "avg_revenue": 37252378.0,
+    "avg_profit": 27756618.0
+  },
+  {
+    "cluster": 1,
+    "n_branches": 1,
+    "avg_margin": 74.121,
+    "avg_revenue": 4553800.0,
+    "avg_profit": 3375301.0
+  },
+  {
+    "cluster": 2,
+    "n_branches": 1,
+    "avg_margin": 75.509,
+    "avg_revenue": 27118500.0,
+    "avg_profit": 20477001.0
+  },
+  {
+    "cluster": 3,
+    "n_branches": 4,
+    "avg_margin": 73.822,
+    "avg_revenue": 25248164.0,
+    "avg_profit": 18761786.0
+  }
+]

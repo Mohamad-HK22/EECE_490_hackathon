@@ -1,0 +1,8 @@
+/* Global app overrides — main styles live in index.css */
+* {
+  box-sizing: border-box;
+}
+
+html, body, #root {
+  height: 100%;
+}

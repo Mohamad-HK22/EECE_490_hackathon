@@ -1,0 +1,33 @@
+{
+  "model_r2": 0.8553,
+  "model_r2_std": 0.0276,
+  "n_samples": 11230,
+  "n_branches": 25,
+  "n_products": 504,
+  "feature_importances": {
+    "branch": 0.0009,
+    "product": 0.2957,
+    "division": 0.1145,
+    "category": 0.0447,
+    "unit_price": 0.5076,
+    "qty": 0.0365
+  },
+  "total_profit_baseline": 626275187.0,
+  "total_revenue_baseline": 840460142.0,
+  "avg_margin_baseline": 62.704,
+  "pools": {
+    "margin_residual": 5277089.0,
+    "branch_mix": 8960518.0,
+    "price_standardization": 7699065.0,
+    "availability_gap": 4551993.0
+  },
+  "best_cluster": 2,
+  "best_cluster_margin": 75.509,
+  "best_cluster_drivers": [
+    "GRAB&GO BEVERAGES",
+    "SANDWICHES",
+    "HEALTHY SECTION",
+    "GRAB&GO FOOD",
+    "CROISSANT"
+  ]
+}
