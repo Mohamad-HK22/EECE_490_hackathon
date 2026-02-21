@@ -10,10 +10,11 @@ router.get('/summary', (req, res) => {
   const ms    = getDataset('monthly_sales_long.csv');
 
   const totalProfit  = items.reduce((s, r) => s + (r.total_profit || 0), 0);
-  const totalRevenue = items.reduce((s, r) => s + (r.total_price  || 0), 0);
   const totalCost    = items.reduce((s, r) => s + (r.total_cost   || 0), 0);
+  // Use true revenue proxy from the brief: revenue = cost + profit
+  const totalRevenue = totalCost + totalProfit;
   const avgMargin    = totalRevenue > 0
-    ? ((totalProfit / (totalProfit + totalRevenue)) * 100)
+    ? ((totalProfit / totalRevenue) * 100)
     : 0;
 
   // Best category by profit
@@ -29,7 +30,7 @@ router.get('/summary', (req, res) => {
     .reduce((s, r) => s + Math.abs(r.total_profit || 0), 0);
 
   // Best month 2025
-  const ms2025 = ms.filter(r => r.year === 2025 && r.period !== 'total_by_year');
+  const ms2025 = ms.filter(r => r.year === 2025 && r.period_type === 'month');
   const monthlyMap = {};
   ms2025.forEach(r => {
     monthlyMap[r.period] = (monthlyMap[r.period] || 0) + (r.sales_amount || 0);
@@ -37,9 +38,9 @@ router.get('/summary', (req, res) => {
   const bestMonth = Object.entries(monthlyMap).sort((a,b) => b[1]-a[1])[0]?.[0] || 'august';
 
   // YoY change
-  const total2025 = ms.filter(r => r.year === 2025 && r.period !== 'total_by_year')
+  const total2025 = ms.filter(r => r.year === 2025 && r.period_type === 'month')
     .reduce((s,r) => s + (r.sales_amount||0), 0);
-  const total2026 = ms.filter(r => r.year === 2026 && r.period !== 'total_by_year')
+  const total2026 = ms.filter(r => r.year === 2026 && r.period_type === 'month')
     .reduce((s,r) => s + (r.sales_amount||0), 0);
   const yoyChange = total2025 > 0 ? ((total2026 - total2025) / total2025 * 100) : 0;
 
