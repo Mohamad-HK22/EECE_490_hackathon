@@ -1,0 +1,7 @@
+fastapi==0.99.1
+uvicorn==0.23.1
+pandas==2.1.1
+numpy==1.27.0
+matplotlib==3.7.2
+seaborn==0.12.2
+plotly==5.17.0
